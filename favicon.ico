@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="goldFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2D394" />
+      <stop offset="50%" stop-color="#D6AD60" />
+      <stop offset="100%" stop-color="#BF9744" />
+    </linearGradient>
+    <linearGradient id="silverFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CBD5E1" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+  </defs>
+
+  <circle cx="50" cy="50" r="48" fill="#0A172B" stroke="url(#goldFav)" stroke-width="3" />
+  <circle cx="50" cy="50" r="44" fill="none" stroke="url(#goldFav)" stroke-width="1.2" stroke-opacity="0.8" />
+
+  <!-- Labyrinth Meander Segments around rim -->
+  <g stroke="url(#goldFav)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(50, 50)">
+    <path d="M 32 -10 A 34 34 0 0 1 40 5 L 42 6 A 42 42 0 0 0 34 -15 L 30 -14 L 36 -3 A 36 36 0 0 1 31 8 L 27 7" transform="rotate(0)" />
+    <path d="M 32 -10 A 34 34 0 0 1 40 5 L 42 6 A 42 42 0 0 0 34 -15 L 30 -14 L 36 -3 A 36 36 0 0 1 31 8 L 27 7" transform="rotate(60)" />
+    <path d="M 32 -10 A 34 34 0 0 1 40 5 L 42 6 A 42 42 0 0 0 34 -15 L 30 -14 L 36 -3 A 36 36 0 0 1 31 8 L 27 7" transform="rotate(120)" />
+    <path d="M 32 -10 A 34 34 0 0 1 40 5 L 42 6 A 42 42 0 0 0 34 -15 L 30 -14 L 36 -3 A 36 36 0 0 1 31 8 L 27 7" transform="rotate(180)" />
+    <path d="M 32 -10 A 34 34 0 0 1 40 5 L 42 6 A 42 42 0 0 0 34 -15 L 30 -14 L 36 -3 A 36 36 0 0 1 31 8 L 27 7" transform="rotate(240)" />
+    <path d="M 32 -10 A 34 34 0 0 1 40 5 L 42 6 A 42 42 0 0 0 34 -15 L 30 -14 L 36 -3 A 36 36 0 0 1 31 8 L 27 7" transform="rotate(300)" />
+  </g>
+
+  <!-- Center Hexagon -->
+  <g transform="translate(50, 50)">
+    <polygon points="16,0 8,13.8 -8,13.8 -16,0 -8,-13.8 8,-13.8"
+             fill="#08101D"
+             stroke="url(#silverFav)"
+             stroke-width="2.5" />
+    <text x="0" y="5.5"
+          font-family="'Playfair Display', Georgia, serif"
+          font-weight="700"
+          font-size="16"
+          text-anchor="middle"
+          fill="url(#goldFav)">
+      S
+    </text>
+  </g>
+</svg>
