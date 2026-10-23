@@ -43,7 +43,7 @@ export default function Footer({ onOpenLegal, onSelectService }) {
           <div className="footer-col brand-col">
             <div className="footer-logo-wrapper">
               <img
-                src="/assets/logo-transparent.png"
+                src="assets/logo-transparent.png"
                 alt="Shrikha Finserv Logo"
                 className="footer-logo-img"
                 width="64"

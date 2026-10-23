@@ -26,7 +26,7 @@ export default function About({ onDiscoverClick }) {
           <div className="about-visual-column">
             <div className="about-image-wrapper">
               <img
-                src="/assets/images/about-guidance.jpg"
+                src="assets/images/about-guidance.jpg"
                 alt="Shrikha Finserv team providing clear financial guidance in Mysore office"
                 className="about-image"
                 width="600"

@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, 'dist'),
       filename: isProduction ? 'static/js/[name].[contenthash:8].js' : 'bundle.js',
       clean: true,
-      publicPath: '/'
+      publicPath: isProduction ? '/Shrikha_Finserv/' : '/'
     },
     resolve: {
       extensions: ['.js', '.jsx', '.json']
