@@ -1,0 +1,255 @@
+/* ==========================================================================
+   SHRIKHA FINSERV — ANIMATIONS & KEYFRAMES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Core Fade & Slide Transitions
+   -------------------------------------------------------------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Card Entrance & Stagger Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateY(-3px) scale(1.006);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardEntranceSimple {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Floating Levitation Keyframes (for Hero & About Cards)
+   -------------------------------------------------------------------------- */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes cardFloat1 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.6deg);
+  }
+}
+
+@keyframes cardFloat2 {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-0.6deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Pulse, Glow & Shimmer Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.92;
+    transform: scale(1.025);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(30, 77, 140, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(30, 77, 140, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(30, 77, 140, 0);
+  }
+}
+
+@keyframes pulseRingGold {
+  0% {
+    box-shadow: 0 0 0 0 rgba(214, 173, 96, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(214, 173, 96, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(214, 173, 96, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes iconPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18) rotate(-6deg);
+  }
+  100% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+}
+
+@keyframes borderGleam {
+  0%, 100% {
+    border-color: rgba(214, 173, 96, 0.25);
+  }
+  50% {
+    border-color: rgba(214, 173, 96, 0.65);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reusable Animation Helper Classes
+   -------------------------------------------------------------------------- */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-float-1 {
+  animation: cardFloat1 6s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: cardFloat2 7s ease-in-out infinite 0.5s;
+}
+
+/* Stagger helper using CSS variable --card-index */
+.card-stagger-item {
+  animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 0.055s);
+  will-change: transform, opacity;
+}
+
+/* Scroll reveal helper class */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* When a container with cards is revealed, trigger staggered card entrance */
+.reveal-on-scroll.is-visible .card-stagger-item {
+  animation: cardEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 0.06s);
+}
+
+/* Reduced Motion Override for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on-scroll,
+  .card-stagger-item {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

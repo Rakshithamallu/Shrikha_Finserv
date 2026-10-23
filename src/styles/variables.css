@@ -1,0 +1,74 @@
+/* ==========================================================================
+   SHRIKHA FINSERV — DESIGN TOKENS & CSS VARIABLES
+   ========================================================================== */
+
+:root {
+  /* Brand Color Palette */
+  --color-primary: #10233F;        /* Deep Navy Blue */
+  --color-primary-light: #16325C;  /* Elevated Navy */
+  --color-primary-dark: #0A172B;   /* Darkest Navy */
+  
+  --color-secondary: #1E4D8C;      /* Royal Blue */
+  --color-secondary-light: #2A66B8;
+  --color-secondary-tint: #EEF4FC;  /* Soft Blue Accent Background */
+  
+  --color-accent: #D6AD60;         /* Elegant Gold */
+  --color-accent-light: #E7C785;   /* Light Gold */
+  --color-accent-dark: #B58C3D;    /* Deep Gold */
+  --color-accent-subtle: #FDF9F0;  /* Gold Tint */
+  
+  --color-white: #FFFFFF;
+  --color-bg: #F5F7FB;             /* Soft Background */
+  --color-bg-alt: #FFFFFF;         /* Card / Alt Background */
+  --color-bg-subtle: #EDF2F9;
+  
+  /* Typography Colors */
+  --color-text-dark: #202B3C;      /* Primary Dark Text */
+  --color-text-muted: #68758A;     /* Muted Secondary Text */
+  --color-text-light: #94A3B8;     /* Light Caption Text */
+  --color-text-white: #FFFFFF;
+  
+  /* Borders and Dividers */
+  --color-border: #E3E8F0;
+  --color-border-subtle: #EEF2F6;
+  --color-border-focus: #1E4D8C;
+  --color-border-accent: rgba(214, 173, 96, 0.4);
+
+  /* Status Colors */
+  --color-success: #16A34A;
+  --color-success-bg: #F0FDF4;
+  --color-error: #DC2626;
+  --color-error-bg: #FEF2F2;
+  --color-warning: #D97706;
+
+  /* Typography */
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(16, 35, 63, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(16, 35, 63, 0.07), 0 2px 4px -2px rgba(16, 35, 63, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(16, 35, 63, 0.08), 0 4px 6px -4px rgba(16, 35, 63, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(16, 35, 63, 0.1), 0 8px 10px -6px rgba(16, 35, 63, 0.04);
+  --shadow-card: 0 4px 20px rgba(16, 35, 63, 0.06);
+  --shadow-card-hover: 0 16px 32px rgba(16, 35, 63, 0.12);
+  --shadow-gold: 0 8px 24px rgba(214, 173, 96, 0.25);
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout Containers */
+  --container-max: 1240px;
+  --container-narrow: 900px;
+  --header-height: 80px;
+  --announcement-height: 38px;
+}
