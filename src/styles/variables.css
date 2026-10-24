@@ -80,3 +80,17 @@
   --header-height: 80px;
   --announcement-height: 38px;
 }
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 56px;
+    --announcement-height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 50px;
+    --announcement-height: 28px;
+  }
+}

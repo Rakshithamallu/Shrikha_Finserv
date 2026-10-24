@@ -42,6 +42,26 @@
   border-color: var(--color-primary);
 }
 
+@media (max-width: 768px) {
+  .pl-nav-brand-group {
+    gap: 0.6rem;
+  }
+  .back-to-services-chip {
+    padding: 0.25rem 0.55rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pl-nav-brand-group {
+    gap: 0.4rem;
+  }
+  .back-to-services-chip {
+    padding: 0.2rem 0.45rem;
+    font-size: 0.72rem;
+  }
+}
+
 .pl-breadcrumb {
   display: flex;
   align-items: center;
