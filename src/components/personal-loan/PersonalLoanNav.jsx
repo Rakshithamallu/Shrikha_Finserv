@@ -63,6 +63,9 @@ export default function PersonalLoanNav({ onNavigateHome, onEnquireClick }) {
               width="56"
               height="54"
             />
+            <span className="navbar-brand-text">
+              SHRIKHA <span className="brand-text-gold">FINSERV</span>
+            </span>
           </a>
         </div>
 

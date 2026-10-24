@@ -172,10 +172,36 @@
   transform: scale(1.03);
 }
 
+.navbar-brand-text {
+  display: none;
+  font-family: var(--font-main, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  margin-left: 0.65rem;
+  white-space: nowrap;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.navbar-brand-text .brand-text-gold {
+  color: var(--color-accent, #D4A84F);
+}
+
 .mobile-logo-img {
   height: 46px;
   width: auto;
   object-fit: contain;
+}
+
+@media (max-width: 1140px) {
+  .navbar-brand-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -188,6 +214,10 @@
   .navbar-logo-img {
     height: 38px;
     max-width: 155px;
+  }
+  .navbar-brand-text {
+    font-size: 1rem;
+    margin-left: 0.55rem;
   }
   .mobile-logo-img {
     height: 34px;
@@ -207,6 +237,11 @@
     height: 33px;
     max-width: 135px;
   }
+  .navbar-brand-text {
+    font-size: 0.92rem;
+    margin-left: 0.45rem;
+    letter-spacing: 0.03em;
+  }
   .mobile-logo-img {
     height: 30px;
   }
@@ -216,6 +251,13 @@
   .mobile-toggle-btn svg {
     width: 22px;
     height: 22px;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar-brand-text {
+    font-size: 0.82rem;
+    margin-left: 0.35rem;
   }
 }
 
