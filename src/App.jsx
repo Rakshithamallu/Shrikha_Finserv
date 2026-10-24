@@ -13,6 +13,10 @@ import ContactForm from './components/ContactForm';
 import Location from './components/Location';
 import Footer from './components/Footer';
 import LegalModal from './components/LegalModal';
+import PersonalLoanPage from './components/personal-loan/PersonalLoanPage';
+import HomeLoanPage from './components/home-loan/HomeLoanPage';
+import CarLoanPage from './components/car-loan/CarLoanPage';
+import BusinessLoanPage from './components/business-loan/BusinessLoanPage';
 import { useScrollSpy } from './hooks/useScrollSpy';
 import { ArrowUp, MessageCircle } from 'lucide-react';
 
@@ -24,6 +28,110 @@ export default function App() {
   const [legalModalState, setLegalModalState] = useState({ isOpen: false, type: 'privacy' });
   const [showBackToTop, setShowBackToTop] = useState(false);
 
+  // Path & Hash Routing State
+  const [currentPath, setCurrentPath] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return '/';
+  });
+
+  const [currentHash, setCurrentHash] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.hash;
+    }
+    return '';
+  });
+
+  // Check if current route corresponds to the dedicated Business Loan page
+  const isBusinessLoanPage = (() => {
+    const p = (currentPath || '').toLowerCase();
+    const h = (currentHash || '').toLowerCase();
+    return (
+      p === '/services/business-loan' ||
+      p === '/services/business-loan/' ||
+      p.endsWith('/services/business-loan') ||
+      p.endsWith('/services/business-loan/') ||
+      h === '#business-loan' ||
+      h === '#/services/business-loan'
+    );
+  })();
+
+  // Check if current route corresponds to the dedicated Car Loan page
+  const isCarLoanPage = (() => {
+    const p = (currentPath || '').toLowerCase();
+    const h = (currentHash || '').toLowerCase();
+    return (
+      p === '/services/car-loan' ||
+      p === '/services/car-loan/' ||
+      p.endsWith('/services/car-loan') ||
+      p.endsWith('/services/car-loan/') ||
+      h === '#car-loan' ||
+      h === '#/services/car-loan'
+    );
+  })();
+
+  // Check if current route corresponds to the dedicated Home Loan page
+  const isHomeLoanPage = (() => {
+    const p = (currentPath || '').toLowerCase();
+    const h = (currentHash || '').toLowerCase();
+    return (
+      p === '/services/home-loan' ||
+      p === '/services/home-loan/' ||
+      p.endsWith('/services/home-loan') ||
+      p.endsWith('/services/home-loan/') ||
+      h === '#home-loan' ||
+      h === '#/services/home-loan'
+    );
+  })();
+
+  // Check if current route corresponds to the dedicated Personal Loan page
+  const isPersonalLoanPage = (() => {
+    const p = (currentPath || '').toLowerCase();
+    const h = (currentHash || '').toLowerCase();
+    return (
+      p === '/personal-loan-enquiry' ||
+      p === '/personal-loan-enquiry/' ||
+      p.endsWith('/personal-loan-enquiry') ||
+      p.endsWith('/personal-loan-enquiry/') ||
+      p === '/services/personal-loan' ||
+      p === '/services/personal-loan/' ||
+      p.endsWith('/services/personal-loan') ||
+      p.endsWith('/services/personal-loan/') ||
+      h === '#personal-loan' ||
+      h === '#personal-loan-enquiry' ||
+      h === '#/personal-loan-enquiry' ||
+      h === '#/services/personal-loan'
+    );
+  })();
+
+  // Listen for browser Back/Forward (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Sync document page title
+  useEffect(() => {
+    if (isBusinessLoanPage) {
+      document.title = 'Business Loan Enquiry & EMI Calculator | Shrikha Finserv';
+    } else if (isCarLoanPage) {
+      document.title = 'Car Loan Enquiry & EMI Calculator | Shrikha Finserv';
+    } else if (isHomeLoanPage) {
+      document.title = 'Home Loan Enquiry & EMI Calculator | Shrikha Finserv';
+    } else if (isPersonalLoanPage) {
+      document.title = 'Personal Loan Enquiry & EMI Calculator | Shrikha Finserv';
+    } else {
+      document.title = 'Shrikha Finserv | Loans, Insurance & Financial Services in Mysore';
+    }
+  }, [isBusinessLoanPage, isCarLoanPage, isHomeLoanPage, isPersonalLoanPage]);
+
+  // Back to top scroll watcher
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 350) {
@@ -44,7 +152,60 @@ export default function App() {
     });
   };
 
-  const handleEnquireService = (serviceName) => {
+  /**
+   * Internal router navigation function supporting URL updates and anchor offsets
+   */
+  const navigateTo = (path, anchorId = null) => {
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', path);
+      setCurrentPath(window.location.pathname);
+      setCurrentHash(window.location.hash);
+
+      if (anchorId) {
+        setTimeout(() => {
+          const el = document.getElementById(anchorId);
+          if (el) {
+            const headerOffset = 80;
+            const elementPosition = el.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 60);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  /**
+   * Handles enquiry request:
+   * - If Home Loan card -> Navigates to /services/home-loan
+   * - If Personal Loan card -> Navigates to /services/personal-loan
+   * - Other services -> Preselects service and smoothly scrolls to contact form on main page
+   */
+  const handleEnquireService = (serviceName, navigateToDedicated = false, dedicatedRoute = '') => {
+    if (navigateToDedicated) {
+      if (dedicatedRoute === 'business-loan' || serviceName === 'Business Loan') {
+        navigateTo('/services/business-loan');
+        return;
+      }
+      if (dedicatedRoute === 'car-loan' || serviceName === 'Vehicle Loan' || serviceName === 'Car Loan') {
+        navigateTo('/services/car-loan');
+        return;
+      }
+      if (dedicatedRoute === 'home-loan' || serviceName === 'Home Loan') {
+        navigateTo('/services/home-loan');
+        return;
+      }
+      if (dedicatedRoute === 'personal-loan' || serviceName === 'Personal Loan') {
+        navigateTo('/personal-loan-enquiry');
+        return;
+      }
+    }
+
     setPreselectedService(serviceName);
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -65,6 +226,50 @@ export default function App() {
   const closeLegalModal = () => {
     setLegalModalState(prev => ({ ...prev, isOpen: false }));
   };
+
+  // If viewing the dedicated Business Loan Enquiry & EMI Calculator page
+  if (isBusinessLoanPage) {
+    return (
+      <BusinessLoanPage
+        onNavigateHome={(anchorId) => {
+          navigateTo(anchorId ? `/#${anchorId}` : '/', anchorId);
+        }}
+      />
+    );
+  }
+
+  // If viewing the dedicated Car Loan Enquiry & EMI Calculator page
+  if (isCarLoanPage) {
+    return (
+      <CarLoanPage
+        onNavigateHome={(anchorId) => {
+          navigateTo(anchorId ? `/#${anchorId}` : '/', anchorId);
+        }}
+      />
+    );
+  }
+
+  // If viewing the dedicated Home Loan Enquiry & EMI Calculator page
+  if (isHomeLoanPage) {
+    return (
+      <HomeLoanPage
+        onNavigateHome={(anchorId) => {
+          navigateTo(anchorId ? `/#${anchorId}` : '/', anchorId);
+        }}
+      />
+    );
+  }
+
+  // If viewing the dedicated Personal Loan Enquiry & EMI Calculator page
+  if (isPersonalLoanPage) {
+    return (
+      <PersonalLoanPage
+        onNavigateHome={(anchorId) => {
+          navigateTo(anchorId ? `/#${anchorId}` : '/', anchorId);
+        }}
+      />
+    );
+  }
 
   return (
     <div className="app-wrapper">

@@ -32,13 +32,13 @@ body {
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid var(--color-secondary);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
 /* Selection */
 ::selection {
-  background-color: var(--color-secondary-tint);
+  background-color: rgba(212, 168, 79, 0.25);
   color: var(--color-primary);
 }
 
@@ -208,13 +208,13 @@ ul, ol {
 .btn-primary {
   background-color: var(--color-primary);
   color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(16, 35, 63, 0.2);
+  box-shadow: 0 4px 14px rgba(16, 42, 67, 0.25);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30, 77, 140, 0.3);
+  box-shadow: 0 6px 20px rgba(16, 42, 67, 0.35);
   color: #FFFFFF;
 }
 
@@ -223,17 +223,17 @@ ul, ol {
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, #E8C378 0%, #D6AD60 50%, #C49740 100%);
-  color: var(--color-primary-dark);
+  background: linear-gradient(135deg, #E2B860 0%, var(--color-accent) 50%, #C4973B 100%);
+  color: var(--color-primary);
   font-weight: 700;
   box-shadow: var(--shadow-gold);
 }
 
 .btn-gold:hover {
-  background: linear-gradient(135deg, #F0CF8C 0%, #DFB96E 50%, #D3A74F 100%);
+  background: var(--color-accent-dark);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(214, 173, 96, 0.4);
-  color: var(--color-primary-dark);
+  box-shadow: 0 8px 24px rgba(184, 141, 53, 0.45);
+  color: var(--color-primary);
 }
 
 .btn-secondary {
@@ -361,7 +361,8 @@ ul, ol {
 
 .form-input,
 .form-select,
-.form-textarea {
+.form-textarea,
+.form-control {
   width: 100%;
   font-family: inherit;
   font-size: 0.95rem;
@@ -370,6 +371,7 @@ ul, ol {
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 0.75rem 1rem;
+  box-sizing: border-box;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -651,3 +653,27 @@ ul, ol {
     height: 42px;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .section {
+    padding: 2.75rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+  }
+}
+

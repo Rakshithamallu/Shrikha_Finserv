@@ -377,8 +377,7 @@ export default function ContactForm({ preselectedService }) {
                     <address className="info-address">
                       <strong>Shrikha Finserv</strong><br />
                       MIG 12, Block No. 9, WeCreate Space,<br />
-                      Vishwamanava Double Road,<br />
-                      Saraswathipuram, Mysore – 570009,<br />
+                      Vishwamanava Double Road, MID WAY, Domino's 2nd floor, Saraswathipuram, Mysore – 570009,<br />
                       Karnataka, India.
                     </address>
                     <a

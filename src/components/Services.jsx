@@ -43,9 +43,43 @@ export default function Services({ onSelectService }) {
     return service.category === activeCategory;
   });
 
-  const handleEnquire = (serviceTitle) => {
+  const handleEnquire = (serviceItem) => {
+    const isObj = typeof serviceItem === 'object' && serviceItem !== null;
+    const serviceTitle = isObj ? serviceItem.title : serviceItem;
+    const serviceId = isObj ? serviceItem.id : (
+      serviceTitle === 'Personal Loan' ? 'personal-loan' : (serviceTitle === 'Home Loan' ? 'home-loan' : '')
+    );
+
+    if (serviceId === 'vehicle-loan' || serviceTitle === 'Vehicle Loan' || serviceTitle === 'Car Loan') {
+      if (onSelectService) {
+        onSelectService('Vehicle Loan', true, 'car-loan');
+      }
+      return;
+    }
+
+    if (serviceId === 'home-loan' || serviceTitle === 'Home Loan') {
+      if (onSelectService) {
+        onSelectService('Home Loan', true, 'home-loan');
+      }
+      return;
+    }
+
+    if (serviceId === 'business-loan' || serviceTitle === 'Business Loan') {
+      if (onSelectService) {
+        onSelectService('Business Loan', true, 'business-loan');
+      }
+      return;
+    }
+
+    if (serviceId === 'personal-loan' || serviceTitle === 'Personal Loan') {
+      if (onSelectService) {
+        onSelectService('Personal Loan', true, 'personal-loan');
+      }
+      return;
+    }
+
     if (onSelectService) {
-      onSelectService(serviceTitle);
+      onSelectService(serviceTitle, false);
     } else {
       const contactSection = document.getElementById('contact');
       if (contactSection) {
@@ -169,11 +203,13 @@ export default function Services({ onSelectService }) {
                     <button
                       type="button"
                       className="service-enquire-btn"
-                      onClick={() => handleEnquire(service.title)}
+                      onClick={() => handleEnquire(service)}
                       aria-label={`Enquire about ${service.title}`}
                     >
-                      <span>Enquire Now</span>
-                      <ArrowRight size={16} className="btn-arrow" />
+                      <span>{service.id === 'personal-loan' || service.title === 'Personal Loan' ? 'Enquiry Now →' : 'Enquire Now'}</span>
+                      {service.id !== 'personal-loan' && service.title !== 'Personal Loan' && (
+                        <ArrowRight size={16} className="btn-arrow" />
+                      )}
                     </button>
                   </div>
                 </article>

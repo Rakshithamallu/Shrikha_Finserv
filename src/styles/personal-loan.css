@@ -1,0 +1,2829 @@
+/* ==========================================================================
+   SHRIKHA FINSERV — PERSONAL LOAN PAGE & EMI CALCULATOR STYLES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Page Layout & Wrapper
+   -------------------------------------------------------------------------- */
+.personal-loan-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+}
+
+/* --------------------------------------------------------------------------
+   2. Dedicated Header & Breadcrumbs
+   -------------------------------------------------------------------------- */
+.pl-nav-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.back-to-services-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: rgba(16, 35, 63, 0.06);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.back-to-services-chip:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.pl-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+.breadcrumb-link {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb-link:hover {
+  color: var(--color-accent-light);
+  text-decoration: underline;
+}
+
+.breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.breadcrumb-current {
+  color: var(--color-accent-light);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   3. Personal Loan Hero Section
+   -------------------------------------------------------------------------- */
+.personal-loan-hero-section {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 55%, var(--color-primary-light) 100%);
+  color: var(--color-white);
+  padding: 3rem 0 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.personal-loan-hero-section::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  right: -5%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(214, 173, 96, 0.12) 0%, rgba(16, 35, 63, 0) 70%);
+  pointer-events: none;
+}
+
+.pl-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.hero-badge-tag {
+  background-color: rgba(214, 173, 96, 0.16) !important;
+  color: var(--color-accent-light) !important;
+  border-color: rgba(214, 173, 96, 0.3) !important;
+}
+
+.pl-hero-title {
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.highlight-text-gold {
+  color: var(--color-accent);
+  position: relative;
+  display: inline-block;
+}
+
+.pl-hero-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #CBD5E1;
+  margin-bottom: 2rem;
+  max-width: 580px;
+}
+
+.pl-hero-features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero-feature-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero-feature-item .feat-icon {
+  color: var(--color-accent-light);
+}
+
+.pl-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pl-hero-btn-primary {
+  box-shadow: var(--shadow-gold);
+}
+
+/* Hero Glass Visual Card */
+.pl-hero-visual-card {
+  position: relative;
+}
+
+.visual-card-glass {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  position: relative;
+  transition: transform var(--transition-normal);
+}
+
+.visual-card-glass:hover {
+  transform: translateY(-4px);
+  border-color: rgba(214, 173, 96, 0.4);
+}
+
+.visual-icon-bubble {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(214, 173, 96, 0.3) 0%, rgba(214, 173, 96, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(214, 173, 96, 0.4);
+}
+
+.visual-icon {
+  color: var(--color-accent-light);
+}
+
+.visual-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-light);
+}
+
+.visual-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0.25rem 0 1.25rem 0;
+  color: #FFFFFF;
+}
+
+.visual-stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  background: rgba(16, 35, 63, 0.4);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.v-stat-lbl {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.v-stat-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.visual-bullet-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+.v-bullet {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: #E2E8F0;
+}
+
+.v-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.visual-note-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #CBD5E1;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   4. Interactive Personal Loan EMI Calculator
+   -------------------------------------------------------------------------- */
+.calculator-section {
+  padding: 5rem 0;
+  background-color: var(--color-bg);
+}
+
+.calculator-layout-card {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 2.5rem;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: 2.75rem;
+}
+
+/* Left Column: Inputs */
+.calculator-inputs-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.column-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inputs-heading-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.column-icon {
+  color: var(--color-secondary);
+}
+
+.column-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.reset-calculator-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.reset-calculator-btn:hover {
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.calc-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.calc-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.calc-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.label-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-secondary-tint);
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-input-box {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.35rem 0.75rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.calc-input-box:focus-within {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(30, 77, 140, 0.12);
+}
+
+.currency-prefix,
+.unit-suffix {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  padding: 0 0.25rem;
+}
+
+.calc-number-input {
+  border: none;
+  outline: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  width: 140px;
+  font-family: inherit;
+  background: transparent;
+}
+
+.calc-number-input.text-right {
+  text-align: right;
+  width: 70px;
+}
+
+/* Custom Range Sliders */
+.calc-slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.calc-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: #E2E8F0;
+  outline: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.calc-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 3px solid var(--color-accent);
+  box-shadow: 0 2px 6px rgba(16, 35, 63, 0.3);
+  cursor: grab;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.calc-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 10px rgba(16, 35, 63, 0.4);
+}
+
+.calc-range-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+.calc-range-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 3px solid var(--color-accent);
+  box-shadow: 0 2px 6px rgba(16, 35, 63, 0.3);
+  cursor: grab;
+}
+
+.slider-limits {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.775rem;
+  color: var(--color-text-muted);
+}
+
+.slider-current-label {
+  font-weight: 700;
+  color: var(--color-secondary);
+  font-size: 0.8125rem;
+}
+
+/* Quick Preset Chips */
+.quick-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.preset-chip {
+  background: #F8FAFC;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.preset-chip:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-primary);
+  background-color: var(--color-secondary-tint);
+}
+
+.preset-chip.is-active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Info Callout */
+.calculator-info-callout {
+  display: flex;
+  gap: 0.85rem;
+  background-color: #F8FAFC;
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1rem;
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+}
+
+.calculator-info-callout .info-icon {
+  color: var(--color-accent-dark);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. Loan Summary & Visual Chart Column
+   -------------------------------------------------------------------------- */
+.calculator-results-column {
+  background: linear-gradient(180deg, #F9FBFE 0%, #FFFFFF 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.loan-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  height: 100%;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-secondary);
+  background-color: var(--color-secondary-tint);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.summary-tenure-tag {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Monthly EMI Highlight */
+.monthly-emi-highlight {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.monthly-emi-highlight::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(214, 173, 96, 0.25) 0%, rgba(214, 173, 96, 0) 70%);
+  border-radius: 50%;
+}
+
+.emi-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-light);
+  margin-bottom: 0.5rem;
+}
+
+.emi-figure-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.emi-main-figure {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.emi-per-month {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #CBD5E1;
+}
+
+.emi-subtitle {
+  font-size: 0.8125rem;
+  color: #94A3B8;
+  margin: 0;
+}
+
+.emi-subtitle strong {
+  color: #E2E8F0;
+}
+
+/* Visual Chart Section */
+.summary-chart-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chart-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.emi-chart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.5rem;
+}
+
+.chart-svg-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.donut-svg {
+  transform: rotate(0deg);
+  overflow: visible;
+}
+
+.chart-circle-principal,
+.chart-circle-interest {
+  transition: stroke-dasharray 0.4s ease, stroke-dashoffset 0.4s ease;
+}
+
+.chart-center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  max-width: 110px;
+}
+
+.chart-center-label {
+  font-size: 0.725rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.chart-center-value {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  word-break: keep-all;
+}
+
+.chart-legend-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.legend-indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.principal-dot {
+  background-color: var(--color-primary);
+}
+
+.interest-dot {
+  background-color: var(--color-accent);
+}
+
+.legend-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.legend-title {
+  font-size: 0.775rem;
+  color: var(--color-text-muted);
+}
+
+.legend-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.legend-amount {
+  font-size: 0.95rem;
+  color: var(--color-primary);
+}
+
+.legend-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.legend-badge.gold-badge {
+  color: var(--color-accent-dark);
+}
+
+/* Metric Cards */
+.summary-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.metric-box {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform var(--transition-fast);
+}
+
+.metric-box:hover {
+  transform: translateY(-2px);
+}
+
+.metric-box-highlight {
+  background: var(--color-secondary-tint);
+  border-color: rgba(30, 77, 140, 0.2);
+}
+
+.metric-title {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-value {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.text-accent {
+  color: var(--color-accent-dark) !important;
+}
+
+.text-primary {
+  color: var(--color-secondary) !important;
+}
+
+/* Summary Action Button */
+.summary-action-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn-proceed-enquiry {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  box-shadow: var(--shadow-gold);
+}
+
+.action-hint {
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.summary-compliance-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  line-height: 1.4;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.compliance-icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. Personal Loan Enquiry Form
+   -------------------------------------------------------------------------- */
+.enquiry-section {
+  padding: 5rem 0;
+  background-color: #FFFFFF;
+}
+
+.prefill-notification-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1E40AF;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.prefill-notification-banner .banner-icon {
+  color: #2563EB;
+  flex-shrink: 0;
+}
+
+.enquiry-form-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 2.75rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group-span-2 {
+  grid-column: span 2;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.textarea-icon {
+  top: 1rem;
+}
+
+.input-with-icon .form-input,
+.input-with-icon .form-select {
+  padding-left: 2.75rem;
+}
+
+.input-with-icon .form-textarea {
+  padding-left: 2.75rem;
+  resize: vertical;
+}
+
+/* Radio Pill Group */
+.radio-pill-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.radio-pill-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #F8FAFC;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.radio-pill-item:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+.radio-pill-item.is-selected {
+  background-color: var(--color-secondary-tint);
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+/* Preferred Contact Method Pills */
+.contact-methods-pill-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.method-pill-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  background-color: #F8FAFC;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.method-pill-item:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+.method-pill-item.is-selected {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.form-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.775rem;
+  color: var(--color-error);
+  margin-top: 0.35rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.form-privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 1.5rem;
+  padding: 0.85rem 1rem;
+  background-color: #F8FAFC;
+  border-radius: var(--radius-md);
+}
+
+.shield-icon {
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+.form-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.submit-enquiry-btn {
+  flex-grow: 1;
+  justify-content: center;
+  background: var(--color-accent) !important;
+  color: var(--color-primary) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(212, 168, 79, 0.35) !important;
+  border: none !important;
+  transition: all var(--transition-fast);
+}
+
+.submit-enquiry-btn:hover {
+  background: var(--color-accent-dark) !important;
+  color: var(--color-primary) !important;
+  box-shadow: 0 6px 20px rgba(184, 141, 53, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline:hover {
+  background: #F8FAFC;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Success Card */
+.enquiry-success-card {
+  background: #FFFFFF;
+  border: 2px solid #86EFAC;
+  border-radius: var(--radius-xl);
+  padding: 3rem;
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.success-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #ECFDF5;
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+}
+
+.success-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.success-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+.success-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  background: #F8FAFC;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  max-width: 650px;
+  margin: 0 auto 2rem auto;
+  text-align: left;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.summary-lbl {
+  color: var(--color-text-muted);
+}
+
+.summary-val {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.demo-notice-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  max-width: 650px;
+  margin: 0 auto 2rem auto;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #92400E;
+}
+
+.demo-notice-box .notice-icon {
+  color: #D97706;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.phone-inline-link {
+  color: #B45309;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   7. Features Grid & Steps Grid
+   -------------------------------------------------------------------------- */
+.pl-why-us-section {
+  padding: 5rem 0;
+}
+
+.pl-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.pl-feature-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.pl-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(214, 173, 96, 0.4);
+}
+
+.feat-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-secondary-tint);
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.feat-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.feat-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* How It Works Steps */
+.pl-how-it-works-section {
+  padding: 5rem 0;
+  background-color: var(--color-bg);
+}
+
+.pl-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.pl-step-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal);
+}
+
+.pl-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.step-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.step-counter {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  font-family: var(--font-serif);
+}
+
+.step-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-secondary-tint);
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-heading {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.65rem;
+}
+
+.step-explanation {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   8. FAQs & Regulatory Disclaimer
+   -------------------------------------------------------------------------- */
+.pl-faq-section {
+  padding: 5rem 0;
+}
+
+.pl-faq-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.pl-faq-callout .callout-icon {
+  color: var(--color-accent-light);
+  flex-shrink: 0;
+}
+
+.callout-text {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.callout-text strong {
+  font-size: 1rem;
+  color: #FFFFFF;
+}
+
+.callout-text span {
+  font-size: 0.85rem;
+  color: #CBD5E1;
+}
+
+/* Mandatory Disclaimer */
+.pl-disclaimer-section {
+  padding: 3rem 0 5rem 0;
+  background-color: var(--color-bg);
+}
+
+.pl-mandatory-disclaimer-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(214, 173, 96, 0.4);
+  border-left: 5px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.disclaimer-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+
+.disclaimer-icon {
+  color: var(--color-accent-dark);
+}
+
+.disclaimer-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.disclaimer-body {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.disclaimer-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-subtle);
+  flex-wrap: wrap;
+}
+
+.btn-back-services-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: var(--color-secondary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.btn-back-services-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .pl-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .calculator-layout-card {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+
+  .pl-features-grid,
+  .pl-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .calculator-layout-card {
+    padding: 1.5rem;
+  }
+
+  .enquiry-form-card {
+    padding: 1.5rem;
+  }
+
+  .form-grid-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group-span-2 {
+    grid-column: span 1;
+  }
+
+  .radio-pill-group {
+    grid-template-columns: 1fr;
+  }
+
+  .pl-features-grid,
+  .pl-steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .emi-chart-wrapper {
+    flex-direction: column;
+  }
+
+  .summary-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .success-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pl-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pl-hero-btn-primary,
+  .pl-hero-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .visual-card-glass,
+  .pl-feature-card,
+  .pl-step-card,
+  .metric-box,
+  .chart-circle-principal,
+  .chart-circle-interest {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   PERSONAL LOAN ENQUIRY — SIDE-BY-SIDE GRID & INTEGRATED CALCULATOR
+   ========================================================================== */
+.pl-enquiry-hero {
+  padding: 3.5rem 0 4.5rem 0;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 55%, var(--color-primary-light) 100%);
+  color: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Design Decor Layer (Royal Navy + Gold Theme) */
+.pl-enquiry-bg-decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 1. Subtle Gold Constellation Dot-Grid Pattern */
+.pl-enquiry-dot-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(212, 168, 79, 0.16) 1.2px, transparent 1.2px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at 75% 50%, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 75% 50%, black 40%, transparent 80%);
+  opacity: 0.85;
+}
+
+/* 2. Ambient Radial Glowing Orbs (Gold and Deep Navy) */
+.pl-enquiry-ambient-orb-1 {
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 580px;
+  height: 580px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 168, 79, 0.18) 0%, rgba(16, 42, 67, 0) 70%);
+  filter: blur(55px);
+}
+
+.pl-enquiry-ambient-orb-2 {
+  position: absolute;
+  bottom: -150px;
+  left: -80px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(29, 61, 94, 0.45) 0%, transparent 70%);
+  filter: blur(45px);
+}
+
+/* 3. Concentric Luxury Geometric Rings (Gold & Navy) */
+.pl-enquiry-concentric-rings {
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+  width: 440px;
+  height: 440px;
+  pointer-events: none;
+}
+
+.pl-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.pl-ring-outer {
+  width: 440px;
+  height: 440px;
+  border: 1.5px solid rgba(212, 168, 79, 0.14);
+}
+
+.pl-ring-middle {
+  width: 320px;
+  height: 320px;
+  border: 1.5px dashed rgba(212, 168, 79, 0.22);
+  animation: rotatePlRings 60s linear infinite;
+}
+
+.pl-ring-inner {
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(212, 168, 79, 0.28);
+  background: radial-gradient(circle, rgba(212, 168, 79, 0.08) 0%, transparent 75%);
+}
+
+@keyframes rotatePlRings {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* 4. Subtle Floating Gold Sparkles */
+.pl-decor-diamond {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-accent);
+  transform: rotate(45deg);
+  opacity: 0.35;
+  filter: drop-shadow(0 0 8px rgba(212, 168, 79, 0.8));
+}
+
+.pl-diamond-1 {
+  top: 25%;
+  right: 36%;
+  animation: pulsePlDiamond 4s ease-in-out infinite;
+}
+
+.pl-diamond-2 {
+  bottom: 22%;
+  right: 12%;
+  width: 8px;
+  height: 8px;
+  opacity: 0.45;
+  animation: pulsePlDiamond 5s ease-in-out infinite 1.5s;
+}
+
+.pl-diamond-3 {
+  top: 18%;
+  right: 15%;
+  width: 6px;
+  height: 6px;
+  opacity: 0.3;
+  animation: pulsePlDiamond 6s ease-in-out infinite 0.7s;
+}
+
+@keyframes pulsePlDiamond {
+  0%, 100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: rotate(45deg) scale(1.35);
+    opacity: 0.65;
+  }
+}
+
+.pl-enquiry-hero-container {
+  position: relative;
+  z-index: 2;
+}
+
+.pl-enquiry-hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.pl-enquiry-header-box {
+  max-width: 720px;
+}
+
+/* Right Side Floating Visual Cards in Royal Navy + Gold */
+.pl-enquiry-hero-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.pl-hero-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 168, 79, 0.28);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.4rem;
+  box-shadow: 0 10px 25px -5px rgba(10, 28, 46, 0.4), 0 0 15px -3px rgba(212, 168, 79, 0.12);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.pl-hero-stat-card:hover {
+  transform: translateY(-3px) translateX(4px);
+  border-color: rgba(212, 168, 79, 0.55);
+  box-shadow: 0 14px 30px -5px rgba(10, 28, 46, 0.5), 0 0 20px 0 rgba(212, 168, 79, 0.25);
+}
+
+.pl-stat-card-1 {
+  animation: floatSubtle1 6s ease-in-out infinite;
+}
+
+.pl-stat-card-2 {
+  margin-left: 1.5rem;
+  animation: floatSubtle2 7s ease-in-out infinite 0.5s;
+}
+
+.pl-stat-card-3 {
+  animation: floatSubtle1 8s ease-in-out infinite 1s;
+}
+
+@keyframes floatSubtle1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes floatSubtle2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.pl-stat-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(212, 168, 79, 0.15);
+  border: 1px solid rgba(212, 168, 79, 0.35);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(212, 168, 79, 0.15);
+}
+
+.pl-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pl-stat-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.15rem;
+}
+
+.pl-stat-sub {
+  font-size: 0.825rem;
+  color: #CBD5E1;
+  line-height: 1.4;
+}
+
+@media (max-width: 992px) {
+  .pl-enquiry-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .pl-enquiry-hero-visual {
+    display: none;
+  }
+  .pl-enquiry-concentric-rings {
+    display: none;
+  }
+}
+
+.pl-enquiry-main-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0.75rem 0 1rem 0;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
+}
+
+.pl-enquiry-primary-desc {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #E2E8F0;
+  margin-bottom: 0.5rem;
+}
+
+.pl-enquiry-secondary-desc {
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.pl-enquiry-back-wrap {
+  margin-top: 1rem;
+}
+
+.btn-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-back-link:hover {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  border-color: var(--color-accent);
+}
+
+/* Side-by-side Interactive Section */
+.pl-interactive-section {
+  padding: 3.5rem 0 5rem 0;
+  background-color: var(--color-bg);
+}
+
+.personal-loan-side-by-side-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 2.25rem;
+  align-items: start;
+}
+
+.pl-enquiry-form-card,
+.pl-enquiry-calculator-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 20px rgba(16, 35, 63, 0.08);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  transition: box-shadow var(--transition-normal);
+}
+
+.pl-enquiry-form-card:hover,
+.pl-enquiry-calculator-card:hover {
+  box-shadow: 0 8px 30px rgba(16, 35, 63, 0.12);
+}
+
+/* Form specifics */
+.form-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-header-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(16, 35, 63, 0.08);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.form-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.form-card-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.form-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.sync-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #B48325;
+  background: rgba(214, 173, 96, 0.15);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.contact-methods-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+.contact-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: #F8FAFC;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.contact-radio-label.is-selected {
+  background: #FFFFFF;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(16, 35, 63, 0.08);
+}
+
+.radio-hidden {
+  display: none;
+}
+
+.radio-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E1;
+  display: inline-block;
+  position: relative;
+  transition: border-color var(--transition-fast);
+}
+
+.contact-radio-label.is-selected .radio-dot {
+  border-color: var(--color-primary);
+}
+
+.contact-radio-label.is-selected .radio-dot::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.consent-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.custom-checkbox {
+  margin-top: 0.2rem;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.form-buttons-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.submit-btn {
+  flex: 1;
+}
+
+.reset-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.form-privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.privacy-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Calculator specific */
+.card-top-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card-title-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.calculator-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(214, 173, 96, 0.18);
+  color: #9A6E1E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.card-subheading {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.calc-inputs-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.field-hint-text {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
+/* Results section */
+.calc-results-section {
+  background: #F8FAFC;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+}
+
+.monthly-emi-banner {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  color: #FFFFFF;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 14px rgba(16, 35, 63, 0.15);
+}
+
+.banner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.banner-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.banner-amount .currency-symbol {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.banner-amount .main-number {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.banner-amount .per-month {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.banner-subtext {
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 0.4rem;
+}
+
+/* 4 Metrics grid */
+.four-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-box {
+  background: #FFFFFF;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.metric-value.emi-color {
+  color: #1E3A8A;
+}
+
+.metric-value.interest-color {
+  color: #B45309;
+}
+
+.metric-value.total-color {
+  color: var(--color-primary);
+}
+
+/* Visual Progress Breakdown */
+.visual-progress-breakdown {
+  margin-bottom: 1.25rem;
+}
+
+.progress-labels-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.progress-lbl {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-text-dark);
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.principal-dot {
+  background-color: var(--color-accent);
+}
+
+.interest-dot {
+  background-color: var(--color-primary);
+}
+
+.horizontal-progress-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #E2E8F0;
+}
+
+.progress-fill-principal {
+  background-color: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.progress-fill-interest {
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.calc-disclaimer-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  background: rgba(16, 35, 63, 0.04);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 4px;
+  font-size: 0.775rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.disclaimer-info-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Responsive Stacking */
+@media (max-width: 992px) {
+  .personal-loan-side-by-side-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .four-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-buttons-row {
+    flex-direction: column;
+  }
+}
+
+/* Loan Application Fields & Button (Matching User Reference) */
+.app-fields-grid,
+.form-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1.5rem;
+  row-gap: 1.35rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pl-enquiry-form-card .form-group,
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+/* Label & Required Star alignment */
+.pl-enquiry-form-card .form-label,
+.form-fields-grid .form-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary, #102A43);
+  line-height: 1.3;
+}
+
+.pl-enquiry-form-card .form-label-title,
+.form-label-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-primary, #102A43);
+}
+
+.pl-enquiry-form-card .required-star,
+.form-label .required-star {
+  color: #DC2626;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+/* Sync Badge with Calculator */
+.pl-enquiry-form-card .sync-badge,
+.sync-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #8C6212;
+  background: rgba(212, 168, 79, 0.14);
+  border: 1px solid rgba(212, 168, 79, 0.35);
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* Form Controls (Inputs & Selects) */
+.pl-enquiry-form-card .form-control,
+.form-control {
+  width: 100% !important;
+  min-width: 0;
+  height: 48px;
+  font-family: inherit;
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: var(--color-primary, #102A43);
+  background-color: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.pl-enquiry-form-card .form-control:focus,
+.form-control:focus {
+  outline: none;
+  border-color: #D4A84F;
+  box-shadow: 0 0 0 3px rgba(212, 168, 79, 0.22);
+  background-color: #FFFFFF;
+}
+
+.pl-enquiry-form-card .form-control::placeholder,
+.form-control::placeholder {
+  color: #94A3B8;
+  font-weight: 400;
+}
+
+/* Error state */
+.pl-enquiry-form-card .form-control.has-error,
+.form-control.has-error,
+.pl-enquiry-form-card .input-icon-wrapper.has-error .form-control,
+.input-icon-wrapper.has-error .form-control {
+  border-color: #DC2626 !important;
+  background-color: #FEF2F2 !important;
+}
+
+.pl-enquiry-form-card .form-control.has-error:focus,
+.form-control.has-error:focus,
+.pl-enquiry-form-card .input-icon-wrapper.has-error .form-control:focus,
+.input-icon-wrapper.has-error .form-control:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18) !important;
+}
+
+/* Input Icon Wrapper & Field Icons */
+.pl-enquiry-form-card .input-icon-wrapper,
+.input-icon-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.pl-enquiry-form-card .field-icon,
+.input-icon-wrapper .field-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #526579;
+  pointer-events: none;
+  z-index: 2;
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.pl-enquiry-form-card .input-icon-wrapper:focus-within .field-icon,
+.input-icon-wrapper:focus-within .field-icon {
+  color: #B88D35;
+}
+
+.pl-enquiry-form-card .input-icon-wrapper.has-error .field-icon,
+.input-icon-wrapper.has-error .field-icon {
+  color: #DC2626;
+}
+
+.pl-enquiry-form-card .input-icon-wrapper .form-control,
+.input-icon-wrapper .form-control {
+  padding-left: 2.75rem !important;
+}
+
+/* Custom Select Dropdowns */
+.pl-enquiry-form-card .custom-select-wrapper,
+.custom-select-wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pl-enquiry-form-card .select-control,
+.select-control {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 100% !important;
+  height: 48px;
+  background-color: #FFFFFF;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23102A43' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1rem center !important;
+  background-size: 16px !important;
+  padding: 0 2.5rem 0 1rem !important;
+  cursor: pointer;
+}
+
+.pl-enquiry-form-card .select-control:focus,
+.select-control:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4A84F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+.pl-enquiry-form-card .date-input,
+.date-input {
+  font-family: inherit;
+  color: var(--color-primary, #102A43);
+  cursor: pointer;
+}
+
+/* Error Message */
+.pl-enquiry-form-card .form-error-msg,
+.form-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.775rem;
+  font-weight: 500;
+  color: #DC2626;
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.form-error-msg svg {
+  flex-shrink: 0;
+}
+
+.loan-application-submit-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-submit-loan-app {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #E2B860 0%, var(--color-accent) 50%, #C4973B 100%);
+  color: var(--color-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 0.95rem 2.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(212, 168, 79, 0.35);
+  transition: all var(--transition-fast);
+}
+
+.btn-submit-loan-app:hover {
+  background: var(--color-accent-dark);
+  color: var(--color-primary);
+  box-shadow: 0 6px 20px rgba(184, 141, 53, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-submit-loan-app:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(184, 141, 53, 0.3);
+}
+
+.btn-submit-loan-app:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pl-enquiry-form-card .reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.9rem 1.75rem;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  color: #526579;
+  font-family: inherit;
+  font-size: 0.925rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pl-enquiry-form-card .reset-btn:hover {
+  border-color: #94A3B8;
+  background-color: #F8FAFC;
+  color: var(--color-primary);
+}
+
+.application-authorization-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.auth-info-icon {
+  color: #3B82F6;
+  flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+  .personal-loan-side-by-side-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+
+  .pl-enquiry-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .pl-enquiry-hero-visual {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .pl-interactive-section {
+    padding: 2rem 0 3.5rem 0;
+  }
+
+  .personal-loan-side-by-side-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem;
+  }
+
+  .pl-enquiry-form-card,
+  .pl-enquiry-calculator-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: var(--radius-lg, 12px);
+  }
+
+  .form-card-header,
+  .card-top-header {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+  }
+
+  .form-card-title,
+  .card-heading {
+    font-size: 1.25rem;
+  }
+
+  .form-card-subtitle,
+  .card-subheading {
+    font-size: 0.825rem;
+    line-height: 1.45;
+  }
+
+  .form-header-badge,
+  .calculator-icon-badge {
+    width: 38px;
+    height: 38px;
+  }
+
+  .app-fields-grid,
+  .form-fields-grid {
+    grid-template-columns: 1fr !important;
+    column-gap: 0;
+    row-gap: 1.25rem;
+  }
+
+  .pl-enquiry-form-card .form-label,
+  .form-fields-grid .form-label {
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+  }
+
+  .loan-application-submit-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .btn-submit-loan-app {
+    width: 100%;
+    justify-content: center;
+    padding: 0.95rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .pl-enquiry-form-card .reset-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .success-summary-grid {
+    grid-template-columns: 1fr;
+    padding: 1.25rem 1rem;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pl-interactive-section {
+    padding: 1.25rem 0 2.5rem 0;
+  }
+
+  .personal-loan-side-by-side-grid {
+    gap: 1.25rem;
+  }
+
+  .pl-enquiry-form-card,
+  .pl-enquiry-calculator-card {
+    padding: 1.15rem 0.85rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(16, 35, 63, 0.06);
+  }
+
+  .pl-enquiry-hero {
+    padding: 4.75rem 0 2rem 0;
+  }
+
+  .pl-enquiry-main-title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .pl-enquiry-primary-desc {
+    font-size: 0.925rem;
+    line-height: 1.5;
+  }
+
+  .pl-enquiry-secondary-desc {
+    font-size: 0.825rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-back-link {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.85rem;
+  }
+
+  .form-card-title,
+  .card-heading {
+    font-size: 1.15rem;
+  }
+
+  .form-card-header,
+  .card-top-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .pl-enquiry-form-card .form-control,
+  .form-control {
+    height: 46px;
+    font-size: 0.875rem;
+    padding: 0 0.85rem;
+  }
+
+  .pl-enquiry-form-card .input-icon-wrapper .form-control,
+  .input-icon-wrapper .form-control {
+    padding-left: 2.5rem !important;
+  }
+
+  .pl-enquiry-form-card .field-icon,
+  .input-icon-wrapper .field-icon {
+    left: 0.85rem;
+    width: 15px;
+    height: 15px;
+  }
+
+  .pl-enquiry-form-card .select-control,
+  .select-control {
+    height: 46px;
+    font-size: 0.875rem;
+    background-position: right 0.75rem center !important;
+    padding: 0 2.25rem 0 0.85rem !important;
+  }
+
+  .pl-enquiry-form-card .form-label,
+  .form-fields-grid .form-label {
+    font-size: 0.825rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .pl-enquiry-form-card .sync-badge,
+  .sync-badge {
+    font-size: 0.65rem;
+    padding: 0.12rem 0.45rem;
+  }
+
+  .pl-enquiry-form-card .form-error-msg,
+  .form-error-msg {
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+  }
+
+  .calc-field-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.45rem;
+  }
+
+  .calc-label {
+    font-size: 0.85rem;
+  }
+
+  .calc-input-box {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .calc-number-input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .quick-presets {
+    gap: 0.35rem;
+  }
+
+  .preset-chip {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  .calc-results-section {
+    padding: 1rem 0.75rem;
+  }
+
+  .monthly-emi-banner {
+    padding: 1rem 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .banner-amount .main-number {
+    font-size: 1.85rem;
+  }
+
+  .banner-amount .currency-symbol {
+    font-size: 1.2rem;
+  }
+
+  .banner-amount .per-month {
+    font-size: 0.8rem;
+  }
+
+  .banner-subtext {
+    font-size: 0.75rem;
+  }
+
+  .four-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .metric-box {
+    padding: 0.7rem 0.85rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .metric-label {
+    font-size: 0.775rem;
+  }
+
+  .metric-value {
+    font-size: 0.95rem;
+  }
+
+  .progress-labels-row {
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .calc-disclaimer-box {
+    font-size: 0.725rem;
+    padding: 0.7rem;
+    line-height: 1.45;
+  }
+
+  .application-authorization-note {
+    font-size: 0.725rem;
+    line-height: 1.4;
+  }
+}
+
+
+
+

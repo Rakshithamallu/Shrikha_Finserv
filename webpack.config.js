@@ -58,9 +58,13 @@ module.exports = (env, argv) => {
       port: 3000,
       open: false,
       hot: true,
-      historyApiFallback: true,
+      historyApiFallback: {
+        index: '/index.html',
+        disableDotRule: true
+      },
       static: {
-        directory: path.join(__dirname, 'public')
+        directory: path.join(__dirname, 'public'),
+        publicPath: '/'
       },
       proxy: [
         {
