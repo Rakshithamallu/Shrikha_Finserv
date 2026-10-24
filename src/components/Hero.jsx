@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, PhoneCall, ShieldCheck, Landmark, MapPin, Sparkles } from 'lucide-react';
+import { getAssetPath } from '../utils/assetHelper';
 
 export default function Hero({ onExploreClick, onContactClick }) {
   const scrollTo = (id) => {
@@ -81,7 +82,7 @@ export default function Hero({ onExploreClick, onContactClick }) {
         <div className="hero-visual-wrapper">
           <div className="hero-image-frame">
             <img
-              src="assets/images/hero-consultation.jpg"
+              src={getAssetPath('assets/images/hero-consultation.jpg')}
               alt="Professional Shrikha Finserv advisor discussing financial solutions with clients in modern Karnataka office"
               className="hero-main-img"
               width="640"

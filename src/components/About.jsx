@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, Calendar, MapPin, Building2, Shield } from 'lucide-react';
+import { getAssetPath } from '../utils/assetHelper';
 
 export default function About({ onDiscoverClick }) {
   const scrollTo = (id) => {
@@ -26,7 +27,7 @@ export default function About({ onDiscoverClick }) {
           <div className="about-visual-column">
             <div className="about-image-wrapper">
               <img
-                src="assets/images/about-guidance.jpg"
+                src={getAssetPath('assets/images/about-guidance.jpg')}
                 alt="Shrikha Finserv team providing clear financial guidance in Mysore office"
                 className="about-image"
                 width="600"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone, ArrowLeft, Send } from 'lucide-react';
+import { getAssetPath } from '../../utils/assetHelper';
 
 export default function HomeLoanNav({ onNavigateHome, onEnquireClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +55,7 @@ export default function HomeLoanNav({ onNavigateHome, onEnquireClick }) {
             aria-label="Shrikha Finserv Home"
           >
             <img
-              src="assets/logo-transparent.png"
+              src={getAssetPath('assets/logo-transparent.png')}
               alt="Shrikha Finserv Logo"
               className="navbar-logo-img"
               width="56"
@@ -131,7 +132,7 @@ export default function HomeLoanNav({ onNavigateHome, onEnquireClick }) {
       >
         <div className="mobile-drawer-header">
           <img
-            src="assets/logo-transparent.png"
+            src={getAssetPath('assets/logo-transparent.png')}
             alt="Shrikha Finserv Logo"
             className="mobile-logo-img"
             width="50"

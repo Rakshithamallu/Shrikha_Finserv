@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -39,6 +40,9 @@ module.exports = (env, argv) => {
       ]
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.PUBLIC_URL': JSON.stringify(isProduction ? '/Shrikha_Finserv' : '')
+      }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
         favicon: './public/favicon.ico',

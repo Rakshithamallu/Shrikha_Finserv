@@ -1,5 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Clock, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { getAssetPath } from '../utils/assetHelper';
 
 export default function Footer({ onOpenLegal, onSelectService }) {
   const scrollTo = (id) => {
@@ -43,7 +44,7 @@ export default function Footer({ onOpenLegal, onSelectService }) {
           <div className="footer-col brand-col">
             <div className="footer-logo-wrapper">
               <img
-                src="assets/logo-transparent.png"
+                src={getAssetPath('assets/logo-transparent.png')}
                 alt="Shrikha Finserv Logo"
                 className="footer-logo-img"
                 width="64"
