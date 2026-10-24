@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Menu, X, Phone, ArrowLeft, Send } from 'lucide-react';
 import { getAssetPath } from '../../utils/assetHelper';
 
@@ -116,83 +117,94 @@ export default function BusinessLoanNav({ onNavigateHome, onEnquireClick }) {
         </button>
       </div>
 
-      {/* Mobile Drawer Overlay */}
-      <div
-        className={`mobile-drawer-overlay ${mobileMenuOpen ? 'is-open' : ''}`}
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-      />
-
-      {/* Mobile Drawer Menu */}
-      <div
-        className={`mobile-drawer ${mobileMenuOpen ? 'is-open' : ''}`}
-        role="dialog"
-        aria-modal="true"
-      >
-        <div className="mobile-drawer-header">
-          <img
-            src={getAssetPath('assets/logo-transparent.png')}
-            alt="Shrikha Finserv"
-            className="mobile-drawer-logo"
-            width="48"
-            height="46"
-          />
-          <button
-            type="button"
-            className="drawer-close-btn"
+      {/* Mobile Drawer Portal */}
+      {typeof document !== 'undefined' && createPortal(
+        <>
+          <div
+            className={`mobile-drawer-overlay ${mobileMenuOpen ? 'is-open' : ''}`}
             onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close menu"
+            aria-hidden="true"
+          />
+
+          <div
+            className={`mobile-drawer ${mobileMenuOpen ? 'is-open' : ''}`}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation"
           >
-            <X size={24} />
-          </button>
-        </div>
+            <div className="mobile-drawer-header">
+              <img
+                src={getAssetPath('assets/logo-transparent.png')}
+                alt="Shrikha Finserv"
+                className="mobile-logo-img"
+                width="50"
+                height="48"
+              />
+              <button
+                type="button"
+                className="mobile-close-btn"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
 
-        <div className="mobile-drawer-body">
-          <button
-            type="button"
-            className="mobile-back-services-btn"
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onNavigateHome('services');
-            }}
-          >
-            <ArrowLeft size={16} />
-            <span>Return to All Services</span>
-          </button>
+            <nav className="mobile-drawer-nav">
+              <ul className="mobile-nav-list">
+                <li className="mobile-nav-item">
+                  <button
+                    type="button"
+                    className="mobile-nav-link text-gold"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onNavigateHome('services');
+                    }}
+                  >
+                    <ArrowLeft size={16} />
+                    <span>Back to All Services</span>
+                  </button>
+                </li>
+                {navLinks.map((link) => (
+                  <li key={link.sectionId} className="mobile-nav-item">
+                    <button
+                      type="button"
+                      className="mobile-nav-link"
+                      onClick={() => handleNavLinkClick(link.sectionId)}
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <ul className="mobile-nav-list">
-            {navLinks.map((link) => (
-              <li key={link.sectionId} className="mobile-nav-item">
-                <button
-                  type="button"
-                  className="mobile-nav-link"
-                  onClick={() => handleNavLinkClick(link.sectionId)}
-                >
-                  {link.label}
-                </button>
-              </li>
-            ))}
-          </ul>
+            <div className="mobile-drawer-footer">
+              <a
+                href="tel:8792953082"
+                className="btn btn-secondary mobile-call-btn"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Phone size={18} />
+                <span>Call 8792953082</span>
+              </a>
 
-          <div className="mobile-drawer-actions">
-            <a href="tel:8792953082" className="mobile-phone-link">
-              <Phone size={18} />
-              <span>Call: 8792953082</span>
-            </a>
-
-            <button
-              type="button"
-              className="btn btn-gold btn-block"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onEnquireClick();
-              }}
-            >
-              <span>Enquire About Business Loan</span>
-            </button>
+              <button
+                type="button"
+                className="btn btn-gold mobile-enquire-btn"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onEnquireClick();
+                }}
+              >
+                <span>Enquire Now</span>
+                <Send size={18} />
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
+        </>,
+        document.body
+      )}
     </header>
   );
 }

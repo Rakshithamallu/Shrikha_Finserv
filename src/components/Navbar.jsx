@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Menu, X, Phone, ArrowRight } from 'lucide-react';
 import { getAssetPath } from '../utils/assetHelper';
 
@@ -143,73 +144,83 @@ export default function Navbar({ activeSection, onEnquireClick }) {
         </button>
       </div>
 
-      {/* Mobile Navigation Drawer */}
-      <div
-        className={`mobile-drawer-overlay ${mobileMenuOpen ? 'is-open' : ''}`}
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-      />
-
-      <div className={`mobile-drawer ${mobileMenuOpen ? 'is-open' : ''}`} role="dialog" aria-modal="true" aria-label="Mobile Navigation">
-        <div className="mobile-drawer-header">
-          <img
-            src={getAssetPath('assets/logo-transparent.png')}
-            alt="Shrikha Finserv Logo"
-            className="mobile-logo-img"
-            width="50"
-            height="48"
+      {/* Mobile Navigation Drawer Portal */}
+      {typeof document !== 'undefined' && createPortal(
+        <>
+          <div
+            className={`mobile-drawer-overlay ${mobileMenuOpen ? 'is-open' : ''}`}
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
           />
-          <button
-            type="button"
-            className="mobile-close-btn"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close menu"
+
+          <div
+            className={`mobile-drawer ${mobileMenuOpen ? 'is-open' : ''}`}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation"
           >
-            <X size={24} />
-          </button>
-        </div>
+            <div className="mobile-drawer-header">
+              <img
+                src={getAssetPath('assets/logo-transparent.png')}
+                alt="Shrikha Finserv Logo"
+                className="mobile-logo-img"
+                width="50"
+                height="48"
+              />
+              <button
+                type="button"
+                className="mobile-close-btn"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
 
-        <nav className="mobile-drawer-nav">
-          <ul className="mobile-nav-list">
-            {navLinks.map((link) => (
-              <li key={link.id} className="mobile-nav-item">
-                <a
-                  href={link.href}
-                  className={`mobile-nav-link ${activeSection === link.id ? 'is-active' : ''}`}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+            <nav className="mobile-drawer-nav">
+              <ul className="mobile-nav-list">
+                {navLinks.map((link) => (
+                  <li key={link.id} className="mobile-nav-item">
+                    <a
+                      href={link.href}
+                      className={`mobile-nav-link ${activeSection === link.id ? 'is-active' : ''}`}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-        <div className="mobile-drawer-footer">
-          <a
-            href="tel:8792953082"
-            className="btn btn-secondary mobile-call-btn"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <Phone size={18} />
-            <span>Call 8792953082</span>
-          </a>
+            <div className="mobile-drawer-footer">
+              <a
+                href="tel:8792953082"
+                className="mobile-call-btn"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Phone size={18} />
+                <span>Call 8792953082</span>
+              </a>
 
-          <button
-            type="button"
-            className="btn btn-gold mobile-enquire-btn"
-            onClick={handleEnquireAction}
-          >
-            <span>Enquire Now</span>
-            <ArrowRight size={18} />
-          </button>
+              <button
+                type="button"
+                className="btn btn-gold mobile-enquire-btn"
+                onClick={handleEnquireAction}
+              >
+                <span>Enquire Now</span>
+                <ArrowRight size={18} />
+              </button>
 
-          <p className="mobile-address-preview">
-            MIG 12, Block No. 9, WeCreate Space,<br />
-            Saraswathipuram, Mysore – 570009
-          </p>
-        </div>
-      </div>
+              <p className="mobile-address-preview">
+                MIG 12, Block No. 9, WeCreate Space,<br />
+                Saraswathipuram, Mysore – 570009
+              </p>
+            </div>
+          </div>
+        </>,
+        document.body
+      )}
     </header>
   );
 }
