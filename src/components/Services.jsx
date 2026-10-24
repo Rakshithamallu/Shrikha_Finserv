@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Wallet,
   Home,
@@ -15,7 +15,9 @@ import {
   CheckCircle,
   HelpCircle,
   Sparkles,
-  Info
+  Info,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { SERVICES, INVESTMENT_OVERVIEW } from '../data/services';
 
@@ -35,6 +37,7 @@ const ICON_MAP = {
 
 export default function Services({ onSelectService }) {
   const [activeCategory, setActiveCategory] = useState('All Services');
+  const gridRef = useRef(null);
 
   const categories = ['All Services', 'Loans', 'Insurance', 'Investments'];
 
@@ -42,6 +45,24 @@ export default function Services({ onSelectService }) {
     if (activeCategory === 'All Services') return true;
     return service.category === activeCategory;
   });
+
+  const handleCategoryChange = (cat) => {
+    setActiveCategory(cat);
+    if (gridRef.current) {
+      gridRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollCards = (direction) => {
+    if (gridRef.current) {
+      const card = gridRef.current.querySelector('.service-card');
+      const step = card ? card.offsetWidth + 18 : 300;
+      gridRef.current.scrollBy({
+        left: direction === 'left' ? -step : step,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const handleEnquire = (serviceItem) => {
     const isObj = typeof serviceItem === 'object' && serviceItem !== null;
@@ -113,7 +134,7 @@ export default function Services({ onSelectService }) {
               role="tab"
               aria-selected={activeCategory === cat}
               className={`filter-tab-btn ${activeCategory === cat ? 'is-active' : ''}`}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => handleCategoryChange(cat)}
             >
               {cat}
               {cat === 'All Services' && <span className="tab-count">{SERVICES.length}</span>}
@@ -123,6 +144,31 @@ export default function Services({ onSelectService }) {
             </button>
           ))}
         </div>
+
+        {/* Mobile Swipe Navigation Hint */}
+        {activeCategory !== 'Investments' && (
+          <div className="mobile-cards-scroll-hint" aria-hidden="true">
+            <button
+              type="button"
+              className="mobile-scroll-arrow left"
+              onClick={() => handleScrollCards('left')}
+              aria-label="Previous card"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <span className="mobile-scroll-text">
+              Swipe right to left to view cards ({filteredServices.length})
+            </span>
+            <button
+              type="button"
+              className="mobile-scroll-arrow right"
+              onClick={() => handleScrollCards('right')}
+              aria-label="Next card"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
+        )}
 
         {/* Services Grid (or Investment Card) */}
         {activeCategory === 'Investments' ? (
@@ -170,7 +216,7 @@ export default function Services({ onSelectService }) {
             </div>
           </div>
         ) : (
-          <div className="services-grid">
+          <div className="services-grid" ref={gridRef}>
             {filteredServices.map((service, index) => {
               const IconComp = ICON_MAP[service.iconName] || Wallet;
               return (
