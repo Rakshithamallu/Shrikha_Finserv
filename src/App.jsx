@@ -116,6 +116,18 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Ensure page remains static at the top on refresh unless navigating to a specific anchor hash
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+      if (!window.location.hash) {
+        window.scrollTo(0, 0);
+      }
+    }
+  }, []);
+
   // Sync document page title
   useEffect(() => {
     if (isBusinessLoanPage) {

@@ -193,10 +193,6 @@ export default function ContactForm({ preselectedService }) {
   useEffect(() => {
     if (preselectedService && SERVICE_OPTIONS.includes(preselectedService)) {
       setFormData(prev => ({ ...prev, interestedService: preselectedService }));
-      const formEl = document.getElementById('contact-form-card');
-      if (formEl) {
-        formEl.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   }, [preselectedService]);
 
