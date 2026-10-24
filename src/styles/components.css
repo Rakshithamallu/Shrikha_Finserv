@@ -194,7 +194,8 @@
     height: 34px;
   }
   .mobile-toggle-btn {
-    padding: 0.3rem;
+    padding: 0.32rem 0.38rem;
+    border-radius: 7px;
   }
 }
 
@@ -212,11 +213,12 @@
     height: 30px;
   }
   .mobile-toggle-btn {
-    padding: 0.25rem;
+    padding: 0.26rem 0.32rem;
+    border-radius: 6px;
   }
   .mobile-toggle-btn svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -358,19 +360,19 @@
 .mobile-drawer {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   bottom: 0;
   width: 82%;
   max-width: 360px;
   background-color: var(--color-primary);
-  border-left: 1px solid rgba(212, 168, 79, 0.3);
+  border-right: 1px solid rgba(212, 168, 79, 0.3);
   z-index: 2000;
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  transform: translateX(100%);
+  transform: translateX(-100%);
   transition: transform var(--transition-slow);
-  box-shadow: -6px 0 24px rgba(10, 28, 46, 0.5);
+  box-shadow: 6px 0 24px rgba(10, 28, 46, 0.5);
 }
 
 .mobile-drawer.is-open {
@@ -447,10 +449,41 @@
   .desktop-actions {
     display: none;
   }
+  .navbar-container {
+    justify-content: space-between;
+  }
   .mobile-toggle-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    order: -1;
+    background-color: rgba(212, 168, 79, 0.15);
+    color: #FFFFFF;
+    border: 1px solid rgba(212, 168, 79, 0.35);
+    border-radius: 8px;
+    padding: 0.42rem 0.48rem;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(10, 28, 46, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: all var(--transition-fast);
+  }
+  .mobile-toggle-btn:hover,
+  .mobile-toggle-btn:focus-visible {
+    background-color: rgba(212, 168, 79, 0.25);
+    border-color: rgba(212, 168, 79, 0.65);
+    color: var(--color-accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 168, 79, 0.25);
+    outline: none;
+  }
+  .mobile-toggle-btn:active {
+    background-color: rgba(212, 168, 79, 0.35);
+    transform: translateY(0);
+  }
+  .navbar-brand,
+  .pl-nav-brand-group {
+    order: 2;
   }
 }
 
