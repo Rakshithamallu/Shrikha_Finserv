@@ -1827,7 +1827,7 @@
 
 .personal-loan-side-by-side-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 0.95fr 1.05fr;
   gap: 2.25rem;
   align-items: start;
 }
@@ -2578,8 +2578,19 @@
   }
 
   .personal-loan-side-by-side-grid {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 1.75rem;
+  }
+
+  .grid-col-calculator {
+    order: 1 !important;
+    width: 100%;
+  }
+
+  .grid-col-form {
+    order: 2 !important;
+    width: 100%;
   }
 
   .pl-enquiry-form-card,

@@ -149,20 +149,9 @@ export default function PersonalLoanEnquiry({ onBackToServices }) {
       {/* Main Interactive Side-by-Side Area */}
       <section className="section pl-interactive-section" aria-label="Customer Enquiry and EMI Calculator">
         <div className="container">
-          {/* Side-by-Side Two-Column Desktop Grid / Stacked on Mobile */}
+          {/* Side-by-Side Two-Column Desktop Grid / Stacked on Mobile (Calculator first, then Application Form) */}
           <div className="personal-loan-side-by-side-grid">
-            {/* Column 1: Customer Enquiry Form Card */}
-            <div className="grid-col-form">
-              <PersonalLoanForm
-                loanAmount={loanAmount}
-                onLoanAmountChange={setLoanAmount}
-                tenureMonths={tenureMonths}
-                onTenureChange={setTenureMonths}
-                onResetAll={handleResetAll}
-              />
-            </div>
-
-            {/* Column 2: Interactive EMI Calculator Card */}
+            {/* Column 1: Interactive EMI Calculator Card */}
             <div className="grid-col-calculator">
               <PersonalLoanEMICalculator
                 loanAmount={loanAmount}
@@ -173,6 +162,17 @@ export default function PersonalLoanEnquiry({ onBackToServices }) {
                 onRateChange={setAnnualRate}
                 results={results}
                 onReset={handleResetAll}
+              />
+            </div>
+
+            {/* Column 2: Customer Enquiry Form Card */}
+            <div className="grid-col-form">
+              <PersonalLoanForm
+                loanAmount={loanAmount}
+                onLoanAmountChange={setLoanAmount}
+                tenureMonths={tenureMonths}
+                onTenureChange={setTenureMonths}
+                onResetAll={handleResetAll}
               />
             </div>
           </div>
