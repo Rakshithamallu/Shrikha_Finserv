@@ -7,11 +7,18 @@ export const getAssetPath = (path) => {
     return path;
   }
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  const rawPublicUrl = typeof process !== 'undefined' && process.env && process.env.PUBLIC_URL !== undefined
-    ? process.env.PUBLIC_URL
-    : '';
 
-  const base = rawPublicUrl.replace(/\/+$/, '');
+  // 1. Injected at build time by Webpack DefinePlugin
+  let base = process.env.PUBLIC_URL || '';
+
+  // 2. Runtime fallback for GitHub Pages repository subpath
+  if (!base && typeof window !== 'undefined' && window.location && window.location.pathname) {
+    if (window.location.pathname.toLowerCase().includes('shrikha_finserv')) {
+      base = '/Shrikha_Finserv';
+    }
+  }
+
+  base = base.replace(/\/+$/, '');
   return base ? `${base}/${cleanPath}` : `/${cleanPath}`;
 };
 
