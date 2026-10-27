@@ -13,8 +13,23 @@ import {
 
 export default function HomeLoanHero({ onBackToServices, onCalculateClick, onEnquireClick }) {
   return (
-    <section className="personal-loan-hero-section hl-hero-section" aria-label="Home Loan Overview">
-      <div className="container">
+    <section className="personal-loan-hero-section hl-hero-section pl-enquiry-hero" aria-label="Home Loan Overview">
+      {/* Background Decorative Layer (Royal Navy + Gold Theme) */}
+      <div className="pl-enquiry-bg-decor" aria-hidden="true">
+        <div className="pl-enquiry-dot-grid" />
+        <div className="pl-enquiry-ambient-orb-1" />
+        <div className="pl-enquiry-ambient-orb-2" />
+        <div className="pl-enquiry-concentric-rings">
+          <div className="pl-ring pl-ring-outer" />
+          <div className="pl-ring pl-ring-middle" />
+          <div className="pl-ring pl-ring-inner" />
+        </div>
+        <div className="pl-decor-diamond pl-diamond-1" />
+        <div className="pl-decor-diamond pl-diamond-2" />
+        <div className="pl-decor-diamond pl-diamond-3" />
+      </div>
+
+      <div className="container pl-enquiry-hero-container">
         {/* Breadcrumb Navigation */}
         <nav className="pl-breadcrumb" aria-label="Breadcrumb">
           <button

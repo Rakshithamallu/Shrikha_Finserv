@@ -5,7 +5,10 @@
 @import './variables.css';
 @import './animations.css';
 @import './components.css';
+@import './personal-loan.css';
+@import './home-loan.css';
 @import './business-loan.css';
+@import './car-loan.css';
 
 /* Reset & Base Styles */
 *, *::before, *::after {

@@ -13,7 +13,54 @@
 }
 
 .bl-hero-section {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-primary-light) 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 55%, var(--color-primary-light) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.visual-subtitle {
+  font-size: 0.875rem;
+  color: #CBD5E1;
+  margin: -0.5rem 0 1.25rem 0;
+  line-height: 1.5;
+}
+
+.visual-quick-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: rgba(16, 35, 63, 0.45);
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.25rem;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.stat-label {
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.stat-num {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.visual-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-accent-light);
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .bl-calculator-section {
