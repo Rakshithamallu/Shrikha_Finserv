@@ -48,7 +48,7 @@ export default function About({ onDiscoverClick }) {
             {/* Address callout chip */}
             <div className="about-location-chip">
               <MapPin size={18} className="chip-icon" />
-              <span>WeCreate Space, Vishwamanava Double Rd, Saraswathipuram, Mysore</span>
+              <span>Wekreate Space - Midway Hub, Kuvempunagara North, Saraswathipuram, Mysuru</span>
             </div>
           </div>
 

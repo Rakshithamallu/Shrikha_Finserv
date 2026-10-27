@@ -216,8 +216,9 @@ export default function Navbar({ activeSection, onEnquireClick }) {
               </button>
 
               <p className="mobile-address-preview">
-                MIG 12, Block No. 9, WeCreate Space,<br />
-                Saraswathipuram, Mysore – 570009
+                2nd floor, Wekreate Space - Midway Hub,<br />
+                Vishwamanava Double Rd, Kuvempunagara North,<br />
+                Saraswathipuram, Mysuru – 570009
               </p>
             </div>
           </div>

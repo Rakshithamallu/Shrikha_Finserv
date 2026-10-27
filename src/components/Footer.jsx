@@ -110,9 +110,11 @@ export default function Footer({ onOpenLegal, onSelectService }) {
               <div className="footer-contact-item">
                 <MapPin size={18} className="f-icon" />
                 <span>
-                  MIG 12, Block No. 9, WeCreate Space,<br />
-                  Vishwamanava Double Road, Saraswathipuram,<br />
-                  Mysore – 570009, Karnataka
+                  2nd floor, Wekreate Space - Midway Hub,<br />
+                  block 9, Vishwamanava Double Road,<br />
+                  Kuvempunagara North,<br />
+                  Saraswathipuram, Mysuru,<br />
+                  Karnataka 570009, India
                 </span>
               </div>
 

@@ -22,7 +22,7 @@ export const FAQS = [
   {
     id: 'faq-5',
     question: 'How do I contact Shrikha Finserv?',
-    answer: 'You can reach us by phone at 8792953082, email us at shrikhafinserv@gmail.com, or visit us in person at MIG 12, Block No. 9, WeCreate Space, Vishwamanava Double Road, Saraswathipuram, Mysore – 570009, Karnataka, India.'
+    answer: 'You can reach us by phone at 8792953082, email us at shrikhafinserv@gmail.com, or visit us in person at 2nd floor, Wekreate Space - Midway Hub, block 9, Vishwamanava Double Road, Kuvempunagara North, Saraswathipuram, Mysuru, Karnataka 570009, India.'
   },
   {
     id: 'faq-6',

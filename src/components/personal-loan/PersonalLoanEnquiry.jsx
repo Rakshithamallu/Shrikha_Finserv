@@ -200,7 +200,7 @@ export default function PersonalLoanEnquiry({ onBackToServices }) {
               These calculations are estimates based on the values entered. Actual interest rates, fees, eligibility, and repayment terms may vary. This calculator does not constitute a loan offer or guarantee of approval.
             </p>
             <div className="disclaimer-footer-row">
-              <span>Shrikha Finserv • MIG 12, Block No. 9, WeCreate Space, Saraswathipuram, Mysore – 570009</span>
+              <span>Shrikha Finserv • 2nd floor, Wekreate Space - Midway Hub, Kuvempunagara North, Saraswathipuram, Mysuru – 570009</span>
               <button
                 type="button"
                 className="btn-back-services-link"

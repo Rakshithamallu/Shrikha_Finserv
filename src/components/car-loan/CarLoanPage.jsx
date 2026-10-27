@@ -119,7 +119,7 @@ export default function CarLoanPage({ onNavigateHome }) {
                 This Car Loan EMI Calculator provides illustrative estimates based on the values entered by the user. Actual interest rates, eligibility, loan amounts, repayment periods, processing fees, and other charges depend on the lender, vehicle type, applicant profile, and applicable terms. The calculator does not guarantee loan approval or constitute a loan offer.
               </p>
               <div className="disclaimer-footer-row">
-                <span>Shrikha Finserv • MIG 12, Block No. 9, WeCreate Space, Saraswathipuram, Mysore – 570009</span>
+                <span>Shrikha Finserv • 2nd floor, Wekreate Space - Midway Hub, Kuvempunagara North, Saraswathipuram, Mysuru – 570009</span>
                 <button
                   type="button"
                   className="btn-back-services-link"

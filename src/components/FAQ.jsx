@@ -3,15 +3,11 @@ import { ChevronDown, HelpCircle, MessageCircleQuestion } from 'lucide-react';
 import { FAQS } from '../data/faqs';
 
 export default function FAQ({ onAskQuestionClick }) {
-  // First item open by default for immediate engagement
-  const [openIds, setOpenIds] = useState(['faq-1']);
+  // First item open by default; only one item open at a time
+  const [openId, setOpenId] = useState('faq-1');
 
   const toggleFAQ = (id) => {
-    if (openIds.includes(id)) {
-      setOpenIds(openIds.filter(item => item !== id));
-    } else {
-      setOpenIds([...openIds, id]);
-    }
+    setOpenId((prevId) => (prevId === id ? null : id));
   };
 
   const handleKeyDown = (e, id) => {
@@ -39,7 +35,7 @@ export default function FAQ({ onAskQuestionClick }) {
 
         <div className="faq-accordion-list" role="presentation">
           {FAQS.map((faq) => {
-            const isOpen = openIds.includes(faq.id);
+            const isOpen = openId === faq.id;
             const contentId = `faq-content-${faq.id}`;
             const headerId = `faq-header-${faq.id}`;
 

@@ -117,7 +117,7 @@ export default function HomeLoanPage({ onNavigateHome }) {
                 This Home Loan EMI Calculator provides illustrative estimates based on the information entered by the user. Actual loan eligibility, interest rates, tenure, processing fees, down payment requirements, and repayment obligations depend on the lender's policies and the applicant's profile. The results do not constitute a loan offer, guarantee approval, or replace formal lender assessment.
               </p>
               <div className="disclaimer-footer-row">
-                <span>Shrikha Finserv • MIG 12, Block No. 9, WeCreate Space, Saraswathipuram, Mysore – 570009</span>
+                <span>Shrikha Finserv • 2nd floor, Wekreate Space - Midway Hub, Kuvempunagara North, Saraswathipuram, Mysuru – 570009</span>
                 <button
                   type="button"
                   className="btn-back-services-link"

@@ -50,14 +50,10 @@ const CAR_LOAN_FAQS = [
 ];
 
 export default function CarLoanFAQ() {
-  const [openIds, setOpenIds] = useState(['cl-faq-1']);
+  const [openId, setOpenId] = useState('cl-faq-1');
 
   const toggleFAQ = (id) => {
-    if (openIds.includes(id)) {
-      setOpenIds(openIds.filter(item => item !== id));
-    } else {
-      setOpenIds([...openIds, id]);
-    }
+    setOpenId((prevId) => (prevId === id ? null : id));
   };
 
   const handleKeyDown = (e, id) => {
@@ -85,7 +81,7 @@ export default function CarLoanFAQ() {
 
         <div className="faq-accordion-list" role="presentation">
           {CAR_LOAN_FAQS.map((faq) => {
-            const isOpen = openIds.includes(faq.id);
+            const isOpen = openId === faq.id;
             const contentId = `content-${faq.id}`;
             const headerId = `header-${faq.id}`;
 

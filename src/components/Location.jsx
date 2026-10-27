@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, Navigation, ExternalLink, Clock, Phone, Bus } from 'lucide-react';
 
 export default function Location() {
-  const directionsUrl = "https://www.google.com/maps/search/?api=1&query=MIG+12+Block+No+9+WeCreate+Space+Vishwamanava+Double+Road+Saraswathipuram+Mysore+570009";
+  const directionsUrl = "https://www.google.com/maps/search/?api=1&query=2nd+floor+Wekreate+Space+-+Midway+Hub+block+9+Vishwamanava+Double+Road+Kuvempunagara+North+Saraswathipuram+Mysuru+Karnataka+570009";
 
   return (
     <section id="location" className="section section-alt location-section" aria-label="Office Location and Directions">
@@ -25,16 +25,17 @@ export default function Location() {
           <div className="location-details-box">
             <h3 className="location-title">Shrikha Finserv</h3>
             <p className="location-address-text">
-              MIG 12, Block No. 9, WeCreate Space,<br />
-              Vishwamanava Double Road,<br />
-              Saraswathipuram, Mysore – 570009,<br />
-              Karnataka, India.
+              2nd floor, Wekreate Space - Midway Hub,<br />
+              block 9, Vishwamanava Double Road,<br />
+              Kuvempunagara North,<br />
+              Saraswathipuram, Mysuru,<br />
+              Karnataka 570009, India
             </p>
 
             <div className="landmark-chips-list">
               <div className="landmark-chip">
                 <Navigation size={15} />
-                <span>Landmark: WeCreate Space</span>
+                <span>Landmark: Wekreate Space - Midway Hub, Kuvempunagara North</span>
               </div>
               <div className="landmark-chip">
                 <Bus size={15} />
@@ -78,7 +79,7 @@ export default function Location() {
             <div className="map-frame">
               <iframe
                 title="Shrikha Finserv Saraswathipuram Mysore Location Map"
-                src="https://maps.google.com/maps?q=Vishwamanava%20Double%20Road,%20Saraswathipuram,%20Mysore%20570009&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Wekreate%20Space%20-%20Midway%20Hub,%20block%209,%20Vishwamanava%20Double%20Road,%20Kuvempunagara%20North,%20Saraswathipuram,%20Mysuru,%20Karnataka%20570009&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

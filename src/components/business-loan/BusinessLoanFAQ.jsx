@@ -50,14 +50,10 @@ const BUSINESS_LOAN_FAQS = [
 ];
 
 export default function BusinessLoanFAQ() {
-  const [openIds, setOpenIds] = useState(['bl-faq-1']);
+  const [openId, setOpenId] = useState('bl-faq-1');
 
   const toggleFAQ = (id) => {
-    if (openIds.includes(id)) {
-      setOpenIds(openIds.filter(item => item !== id));
-    } else {
-      setOpenIds([...openIds, id]);
-    }
+    setOpenId((prevId) => (prevId === id ? null : id));
   };
 
   const handleKeyDown = (e, id) => {
@@ -85,7 +81,7 @@ export default function BusinessLoanFAQ() {
 
         <div className="faq-accordion-list" role="presentation">
           {BUSINESS_LOAN_FAQS.map((faq) => {
-            const isOpen = openIds.includes(faq.id);
+            const isOpen = openId === faq.id;
             const contentId = `content-${faq.id}`;
             const headerId = `header-${faq.id}`;
 

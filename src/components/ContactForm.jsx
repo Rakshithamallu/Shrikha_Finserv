@@ -372,12 +372,14 @@ export default function ContactForm({ preselectedService }) {
                     <span className="info-label">Registered Office</span>
                     <address className="info-address">
                       <strong>Shrikha Finserv</strong><br />
-                      MIG 12, Block No. 9, WeCreate Space,<br />
-                      Vishwamanava Double Road, MID WAY, Domino's 2nd floor, Saraswathipuram, Mysore – 570009,<br />
-                      Karnataka, India.
+                      2nd floor, Wekreate Space - Midway Hub,<br />
+                      block 9, Vishwamanava Double Road,<br />
+                      Kuvempunagara North,<br />
+                      Saraswathipuram, Mysuru,<br />
+                      Karnataka 570009, India
                     </address>
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=MIG+12+Block+No+9+WeCreate+Space+Vishwamanava+Double+Road+Saraswathipuram+Mysore+570009"
+                      href="https://www.google.com/maps/search/?api=1&query=2nd+floor+Wekreate+Space+-+Midway+Hub+block+9+Vishwamanava+Double+Road+Kuvempunagara+North+Saraswathipuram+Mysuru+Karnataka+570009"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="directions-link"

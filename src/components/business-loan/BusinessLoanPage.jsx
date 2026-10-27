@@ -119,7 +119,7 @@ export default function BusinessLoanPage({ onNavigateHome }) {
                 This Business Loan EMI Calculator provides illustrative estimates based on the information entered. Actual interest rates, loan amounts, repayment periods, eligibility, processing fees, and other charges depend on the lender's policies and the applicant's business profile. The results do not constitute a loan offer or guarantee approval.
               </p>
               <div className="disclaimer-footer-row">
-                <span>Shrikha Finserv • MIG 12, Block No. 9, WeCreate Space, Saraswathipuram, Mysore – 570009</span>
+                <span>Shrikha Finserv • 2nd floor, Wekreate Space - Midway Hub, Kuvempunagara North, Saraswathipuram, Mysuru – 570009</span>
                 <button
                   type="button"
                   className="btn-back-services-link"

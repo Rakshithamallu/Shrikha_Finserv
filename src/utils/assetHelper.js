@@ -7,11 +7,12 @@ export const getAssetPath = (path) => {
     return path;
   }
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  const publicUrl = typeof process !== 'undefined' && process.env && process.env.PUBLIC_URL !== undefined
+  const rawPublicUrl = typeof process !== 'undefined' && process.env && process.env.PUBLIC_URL !== undefined
     ? process.env.PUBLIC_URL
-    : '/Shrikha_Finserv';
+    : '';
 
-  return `${publicUrl}/${cleanPath}`;
+  const base = rawPublicUrl.replace(/\/+$/, '');
+  return base ? `${base}/${cleanPath}` : `/${cleanPath}`;
 };
 
 export default getAssetPath;
