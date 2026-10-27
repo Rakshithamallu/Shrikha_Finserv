@@ -22,24 +22,397 @@
 }
 
 /* --------------------------------------------------------------------------
-   2. Business Loan Results & Card Accents
+   2. Two-Column Calculator Layout
    -------------------------------------------------------------------------- */
-.bl-monthly-emi-highlight {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+.calculator-layout-card {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 2.5rem;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 12px 36px rgba(16, 42, 67, 0.08);
+  border: 1px solid var(--color-border);
+  padding: 2.5rem;
+  overflow: hidden;
+  align-items: start;
 }
 
-.four-col-summary {
+.calculator-inputs-column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.calculator-results-column {
+  min-width: 0;
+  background: linear-gradient(180deg, #F8FAFD 0%, #FFFFFF 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   3. Results Panel Container
+   -------------------------------------------------------------------------- */
+.bl-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   4. Monthly EMI Highlight Card (Navy Banner with Gold Accents)
+   -------------------------------------------------------------------------- */
+.bl-monthly-emi-highlight {
+  background: linear-gradient(135deg, #0A1C2E 0%, #102A43 60%, #1D3D5E 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(10, 28, 46, 0.22);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(212, 168, 79, 0.25);
+}
+
+.bl-monthly-emi-highlight::after {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(212, 168, 79, 0.28) 0%, rgba(212, 168, 79, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.highlight-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #E4BE6C;
+  background: rgba(212, 168, 79, 0.14);
+  border: 1px solid rgba(212, 168, 79, 0.28);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.highlight-figure-box {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.figure-currency {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #E4BE6C;
+}
+
+.figure-amount {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.figure-period {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #CBD5E1;
+  margin-left: 0.2rem;
+}
+
+.highlight-caption {
+  font-size: 0.825rem;
+  color: #94A3B8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   5. Donut Breakdown Chart & Legend
+   -------------------------------------------------------------------------- */
+.results-chart-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(16, 42, 67, 0.04);
+}
+
+.chart-heading {
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.emi-chart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.donut-chart-box {
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chart-segment-principal,
+.chart-segment-interest {
+  transition: stroke-dasharray 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), stroke-dashoffset 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.chart-legend-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.legend-marker-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.legend-text {
+  font-size: 0.825rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.legend-values {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.legend-inr {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.legend-pct {
+  font-size: 0.775rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   6. Loan Breakdown Metric Cards (2x2 Grid)
+   -------------------------------------------------------------------------- */
+.loan-breakdown-grid.four-col-summary {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.85rem;
 }
 
-@media (min-width: 540px) {
-  .four-col-summary {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.breakdown-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  box-shadow: 0 1px 3px rgba(16, 42, 67, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.breakdown-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-focus);
+  box-shadow: 0 4px 12px rgba(16, 42, 67, 0.08);
+}
+
+.breakdown-lbl {
+  font-size: 0.725rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.breakdown-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.breakdown-val.emi-accent {
+  color: var(--color-primary);
+}
+
+.breakdown-val.text-interest {
+  color: var(--color-accent-dark);
+}
+
+.breakdown-val.highlight-bold {
+  color: var(--color-secondary-light);
+}
+
+/* --------------------------------------------------------------------------
+   7. Active Parameters Summary Strip
+   -------------------------------------------------------------------------- */
+.active-parameters-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-secondary-tint);
+  border: 1px solid rgba(16, 42, 67, 0.08);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.param-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+}
+
+.param-label {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.param-value {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   8. Action Buttons (Reset & Proceed)
+   -------------------------------------------------------------------------- */
+.results-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.btn-reset-calc {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: #FFFFFF;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-reset-calc:hover {
+  background: var(--color-bg);
+  border-color: var(--color-text-muted);
+  color: var(--color-primary);
+}
+
+.btn-proceed-enquiry {
+  flex: 1.6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #FFFFFF;
+  font-size: 0.925rem;
+  font-weight: 700;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(16, 42, 67, 0.2);
+  transition: all 0.25s ease;
+}
+
+.btn-proceed-enquiry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16, 42, 67, 0.3);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+}
+
+/* --------------------------------------------------------------------------
+   9. Footnote
+   -------------------------------------------------------------------------- */
+.results-footnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  padding: 0.65rem 0.85rem;
+  background: rgba(16, 42, 67, 0.03);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-accent);
+}
+
+.footnote-icon {
+  color: var(--color-accent-dark);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. Funding Planner & Accents
+   -------------------------------------------------------------------------- */
 .bl-planning-icon-wrap {
   background: rgba(214, 173, 96, 0.15) !important;
   color: var(--color-accent) !important;
@@ -60,10 +433,36 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. Responsive Adjustments
+   11. Responsive Adjustments
    -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-  .four-col-summary {
+@media (max-width: 1024px) {
+  .calculator-layout-card {
     grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .calculator-layout-card {
+    padding: 1.25rem;
+  }
+  .calculator-results-column {
+    padding: 1.25rem;
+  }
+  .emi-chart-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  .loan-breakdown-grid.four-col-summary {
+    grid-template-columns: 1fr;
+  }
+  .results-action-buttons {
+    flex-direction: column;
+  }
+  .btn-reset-calc,
+  .btn-proceed-enquiry {
+    width: 100%;
+    flex: none;
   }
 }
