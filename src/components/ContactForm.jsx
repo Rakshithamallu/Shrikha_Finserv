@@ -379,7 +379,7 @@ export default function ContactForm({ preselectedService }) {
                       Karnataka 570009, India
                     </address>
                     <a
-                      href="https://maps.app.goo.gl/2VdCZAtr4QZyiH8a9"
+                      href="https://www.google.com/maps/place/Wekreate+Space+-+Midway+Hub/@12.2986022,76.6237103,17z/data=!3m1!4b1!4m6!3m5!1s0x3baf7b7c70359f81:0xc6996fd65ce1fcba!8m2!3d12.298597!4d76.6262852!16s%2Fg%2F11s4rq848q?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MTEwMS4wIKXMDSoASAFQAw%3D%3D"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="directions-link"
