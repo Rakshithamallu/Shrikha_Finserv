@@ -379,7 +379,7 @@ export default function ContactForm({ preselectedService }) {
                       Karnataka 570009, India
                     </address>
                     <a
-                      href="https://share.google/s1wSpltgNTfVS1Qmj"
+                      href="https://maps.app.goo.gl/2VdCZAtr4QZyiH8a9"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="directions-link"

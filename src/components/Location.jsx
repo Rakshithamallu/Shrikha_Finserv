@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, Navigation, ExternalLink, Clock, Phone, Bus } from 'lucide-react';
 
 export default function Location() {
-  const directionsUrl = "https://share.google/s1wSpltgNTfVS1Qmj";
+  const directionsUrl = "https://maps.app.goo.gl/2VdCZAtr4QZyiH8a9";
 
   return (
     <section id="location" className="section section-alt location-section" aria-label="Office Location and Directions">
