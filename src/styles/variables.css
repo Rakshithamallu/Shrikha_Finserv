@@ -14,6 +14,10 @@
   --color-secondary-light: #244A73;
   --color-secondary-tint: #E8EEF5;  /* Soft Navy Tint */
   
+  /* Header Custom Blue Theme Tokens */
+  --color-header-bg: #004B8E;
+  --color-header-sticky-bg: rgba(0, 75, 142, 0.98);
+  
   --color-accent: #D4A84F;         /* Accent Gold */
   --color-accent-light: #E4BE6C;   /* Light Gold */
   --color-accent-dark: #B88D35;    /* Gold Hover / Deep Gold */

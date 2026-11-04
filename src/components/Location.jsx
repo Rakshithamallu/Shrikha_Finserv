@@ -35,7 +35,7 @@ export default function Location() {
             <div className="landmark-chips-list">
               <div className="landmark-chip">
                 <Navigation size={15} />
-                <span>Landmark: Wekreate Space - Midway Hub, Kuvempunagara North</span>
+                <span>Landmark: Above Dominos, Wekreate Space - Midway Hub, Kuvempunagara North</span>
               </div>
               <div className="landmark-chip">
                 <Bus size={15} />
