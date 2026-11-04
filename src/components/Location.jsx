@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, Navigation, ExternalLink, Clock, Phone, Bus } from 'lucide-react';
 
 export default function Location() {
-  const directionsUrl = "https://maps.app.goo.gl/2VdCZAtr4QZyiH8a9";
+  const directionsUrl = "https://www.google.com/maps/search/?api=1&query=Wekreate+Space+-+Midway+Hub,+Vishwamanava+Double+Road,+Saraswathipuram,+Mysuru,+Karnataka+570009";
 
   return (
     <section id="location" className="section section-alt location-section" aria-label="Office Location and Directions">

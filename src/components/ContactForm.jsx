@@ -379,7 +379,7 @@ export default function ContactForm({ preselectedService }) {
                       Karnataka 570009, India
                     </address>
                     <a
-                      href="https://maps.app.goo.gl/2VdCZAtr4QZyiH8a9"
+                      href="https://www.google.com/maps/search/?api=1&query=Wekreate+Space+-+Midway+Hub,+Vishwamanava+Double+Road,+Saraswathipuram,+Mysuru,+Karnataka+570009"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="directions-link"
