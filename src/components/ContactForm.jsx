@@ -379,7 +379,7 @@ export default function ContactForm({ preselectedService }) {
                       Karnataka 570009, India
                     </address>
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=2nd+floor+Wekreate+Space+-+Midway+Hub+block+9+Vishwamanava+Double+Road+Kuvempunagara+North+Saraswathipuram+Mysuru+Karnataka+570009"
+                      href="https://share.google/s1wSpltgNTfVS1Qmj"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="directions-link"
