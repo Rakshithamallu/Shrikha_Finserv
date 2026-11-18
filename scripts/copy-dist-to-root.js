@@ -49,6 +49,14 @@ try {
     if (fs.existsSync(distFavicon)) {
       fs.copyFileSync(distFavicon, path.join(rootDir, 'favicon.ico'));
     }
+
+    // 5. Sync .htaccess, robots.txt, sitemap.xml
+    ['.htaccess', 'robots.txt', 'sitemap.xml'].forEach(file => {
+      const srcFile = path.join(distDir, file);
+      if (fs.existsSync(srcFile)) {
+        fs.copyFileSync(srcFile, path.join(rootDir, file));
+      }
+    });
   }
 } catch (err) {
   console.error('Error syncing dist to root:', err);
