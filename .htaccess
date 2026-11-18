@@ -1,0 +1,41 @@
+# ----------------------------------------------------------------------
+# Shrikha Finserv — GoDaddy cPanel Apache Configuration (.htaccess)
+# ----------------------------------------------------------------------
+
+# 1. Prioritize index.html over any GoDaddy default placeholder files
+DirectoryIndex index.html index.php
+
+# 2. Single Page Application (SPA) Routing for React
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Serve existing file or directory directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Rewrite all other routes to index.html for React Router navigation
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# 3. Browser Caching for Fast Performance
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  # HTML - Always fresh
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/json "access plus 0 seconds"
+
+  # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # Stylesheets & Scripts
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>

@@ -72,6 +72,12 @@ module.exports = (env = {}, argv = {}) => {
             to: '.htaccess',
             toType: 'file',
             noErrorOnMissing: true
+          },
+          {
+            from: 'public/CNAME',
+            to: 'CNAME',
+            toType: 'file',
+            noErrorOnMissing: true
           }
         ]
       })
