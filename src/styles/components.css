@@ -703,9 +703,9 @@
 }
 
 .hero-description {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 2rem;
   max-width: 580px;
 }
