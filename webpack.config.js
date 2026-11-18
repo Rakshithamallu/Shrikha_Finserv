@@ -3,10 +3,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = (env = {}, argv = {}) => {
+module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
-  const isGhPages = Boolean(env && env.ghpages);
-  const publicPath = isGhPages ? '/Shrikha_Finserv/' : '/';
 
   return {
     entry: './src/index.js',
@@ -14,7 +12,7 @@ module.exports = (env = {}, argv = {}) => {
       path: path.resolve(__dirname, 'dist'),
       filename: isProduction ? 'static/js/[name].[contenthash:8].js' : 'bundle.js',
       clean: true,
-      publicPath: publicPath
+      publicPath: isProduction ? '/Shrikha_Finserv/' : '/'
     },
     resolve: {
       extensions: ['.js', '.jsx', '.json']
@@ -43,7 +41,7 @@ module.exports = (env = {}, argv = {}) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.PUBLIC_URL': JSON.stringify(isGhPages ? '/Shrikha_Finserv' : '')
+        'process.env.PUBLIC_URL': JSON.stringify(isProduction ? '/Shrikha_Finserv' : '')
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
@@ -55,22 +53,6 @@ module.exports = (env = {}, argv = {}) => {
           {
             from: 'public/assets',
             to: 'assets',
-            noErrorOnMissing: true
-          },
-          {
-            from: 'public/robots.txt',
-            to: 'robots.txt',
-            noErrorOnMissing: true
-          },
-          {
-            from: 'public/sitemap.xml',
-            to: 'sitemap.xml',
-            noErrorOnMissing: true
-          },
-          {
-            from: 'public/.htaccess',
-            to: '.htaccess',
-            toType: 'file',
             noErrorOnMissing: true
           }
         ]
