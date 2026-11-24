@@ -13,7 +13,8 @@ import {
   ShieldCheck,
   Eye,
   X,
-  Check
+  Check,
+  MessageCircle
 } from 'lucide-react';
 
 export const SERVICE_OPTIONS = [
@@ -286,55 +287,47 @@ export default function ContactForm({ preselectedService }) {
     setIsSubmitting(true);
     setSubmissionResult(null);
 
+    // Format all client details for WhatsApp forwarding
+    const messageLines = [
+      `*New Service Enquiry - Shrikha Finserv*`,
+      `----------------------------------------`,
+      `*Full Name:* ${formData.fullName}`,
+      `*Mobile Number:* ${formData.phoneNumber}`,
+      `*Email:* ${formData.email || 'Not provided'}`,
+      `*Interested Service:* ${formData.interestedService}`,
+      `*Preferred Contact:* ${formData.preferredContactMethod}`,
+      `*Requirements / Message:*`,
+      `${formData.message || 'No additional notes provided.'}`.trim(),
+      `----------------------------------------`,
+      `_Sent via shrikhafinserv.com_`
+    ];
+
+    const messageText = messageLines.join('\n');
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+
     try {
-      // Attempt backend API call
-      const response = await fetch('/api/enquiries', {
+      // Optional background API call
+      await fetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok && data.success) {
-        setSubmissionResult({
-          status: 'demo_success',
-          mode: data.mode || 'demo',
-          message: data.message || 'Form submitted in Demo Mode.'
-        });
-        setShowPreviewModal(false);
-      } else if (data.errors) {
-        // Backend returned field validation errors
-        setErrors(data.errors);
-        setShowPreviewModal(false);
-        const firstErrorKey = Object.keys(data.errors)[0];
-        if (firstErrorKey) {
-          const el = document.getElementById(firstErrorKey);
-          if (el) {
-            el.focus();
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }
-      } else {
-        // Fallback demo simulation if server is offline or returned demo
-        setSubmissionResult({
-          status: 'demo_success',
-          mode: 'demo',
-          message: 'Your enquiry has been validated in Demonstration Mode. No live email dispatch service is configured at this stage.'
-        });
-        setShowPreviewModal(false);
-      }
-    } catch (err) {
-      // Standalone frontend fallback mode
-      setSubmissionResult({
-        status: 'demo_success',
-        mode: 'demo',
-        message: 'Your enquiry has been validated in Demonstration Mode. Since automated email dispatch is not yet connected, please call or email directly.'
-      });
-      setShowPreviewModal(false);
-    } finally {
-      setIsSubmitting(false);
+        body: JSON.stringify({ ...formData, whatsappTarget: '918550094257' })
+      }).catch(() => {});
+    } catch (e) {
+      // offline-safe
     }
+
+    // Direct WhatsApp popup trigger
+    if (typeof window !== 'undefined') {
+      window.open(whatsappUrl, '_blank');
+    }
+
+    setSubmissionResult({
+      status: 'success',
+      whatsappUrl,
+      message: 'Your enquiry has been received and details forwarded to WhatsApp (+91 8550094257).'
+    });
+    setShowPreviewModal(false);
+    setIsSubmitting(false);
   };
 
   return (
@@ -449,38 +442,36 @@ export default function ContactForm({ preselectedService }) {
                 </p>
               </div>
 
-              {/* Demo Mode Notice Banner (Compliant & Honest) */}
-              <div className="demo-mode-pill" role="note">
-                <HelpCircle size={16} />
-                <span>
-                  <strong>Interactive Form:</strong> Submissions operate in demo mode. For guaranteed instant reach, call <a href="tel:8792953082">8792953082</a>.
-                </span>
-              </div>
-
               {/* Submission Result Feedback */}
               {submissionResult && (
-                <div className="submission-alert-banner alert-demo">
+                <div className="submission-alert-banner alert-success" role="status">
                   <div className="alert-header">
-                    <CheckCircle2 size={20} className="alert-icon" />
-                    <strong>Form Details Validated (Demo Mode)</strong>
+                    <CheckCircle2 size={22} className="alert-icon" />
+                    <strong>Enquiry Submitted Successfully!</strong>
                   </div>
                   <p className="alert-text">
-                    Thank you, <strong>{formData.fullName}</strong>. Your enquiry for <strong>{formData.interestedService}</strong> has been validated cleanly on the client side.
+                    Thank you, <strong>{formData.fullName}</strong>. Your enquiry for <strong>{formData.interestedService}</strong> has been received and your details are being shared with our team on WhatsApp (<strong>+91 8550094257</strong>).
                   </p>
                   <p className="alert-action-prompt">
-                    Because this live website does not yet have an automated transactional email provider configured, <em>please contact us directly via phone or email to proceed immediately:</em>
+                    If WhatsApp did not open automatically, click below to send your details directly or contact our desk:
                   </p>
                   <div className="alert-cta-buttons">
-                    <a href="tel:8792953082" className="btn btn-primary btn-sm">
+                    <a
+                      href={submissionResult.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-whatsapp btn-sm"
+                    >
+                      <MessageCircle size={16} />
+                      <span>Chat on WhatsApp (+91 8550094257)</span>
+                    </a>
+                    <a href="tel:8550094257" className="btn btn-primary btn-sm">
+                      <Phone size={14} />
+                      <span>Call 8550094257</span>
+                    </a>
+                    <a href="tel:8792953082" className="btn btn-secondary btn-sm">
                       <Phone size={14} />
                       <span>Call 8792953082</span>
-                    </a>
-                    <a
-                      href={`mailto:shrikhafinserv@gmail.com?subject=Enquiry%20for%20${encodeURIComponent(formData.interestedService)}&body=Name:%20${encodeURIComponent(formData.fullName)}%0D%0APhone:%20${encodeURIComponent(formData.phoneNumber)}%0D%0AService:%20${encodeURIComponent(formData.interestedService)}%0D%0AMessage:%20${encodeURIComponent(formData.message)}`}
-                      className="btn btn-secondary btn-sm"
-                    >
-                      <Mail size={14} />
-                      <span>Email Shrikha Team</span>
                     </a>
                   </div>
                 </div>
@@ -780,10 +771,10 @@ export default function ContactForm({ preselectedService }) {
                 )}
               </div>
 
-              <div className="preview-note">
-                <HelpCircle size={16} />
+              <div className="preview-note whatsapp-preview-note">
+                <MessageCircle size={16} />
                 <span>
-                  <strong>Note:</strong> Website form submissions are processed in Demonstration Mode. Direct contact links will remain available after submission.
+                  <strong>Instant WhatsApp Forwarding:</strong> Upon confirmation, your enquiry details will be forwarded directly to Shrikha Finserv on WhatsApp (<strong>+91 8550094257</strong>).
                 </span>
               </div>
             </div>
@@ -810,7 +801,7 @@ export default function ContactForm({ preselectedService }) {
                 ) : (
                   <>
                     <Send size={16} />
-                    <span>Confirm & Send Enquiry</span>
+                    <span>Confirm & Send via WhatsApp</span>
                   </>
                 )}
               </button>

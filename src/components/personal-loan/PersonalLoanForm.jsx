@@ -18,7 +18,8 @@ import {
   CreditCard,
   Car,
   ChevronDown,
-  Info
+  Info,
+  MessageCircle
 } from 'lucide-react';
 import {
   OCCUPATION_TYPES,
@@ -187,8 +188,34 @@ export default function PersonalLoanForm({
     setIsSubmitting(true);
 
     try {
-      // Simulate quick frontend validation
-      await new Promise(resolve => setTimeout(resolve, 600));
+      // Format details for WhatsApp
+      const messageLines = [
+        `*New Personal Loan Application - Shrikha Finserv*`,
+        `----------------------------------------`,
+        `*Applicant Name:* ${formData.fullName}`,
+        `*Mobile Number:* ${formData.mobileNumber}`,
+        `*Email:* ${formData.email || 'Not provided'}`,
+        `*City:* ${formData.city}`,
+        `*Occupation:* ${formData.occupationType}`,
+        `*Company / Employer:* ${formData.companyName || 'N/A'}`,
+        `*Company Type:* ${formData.companyStructure || 'N/A'}`,
+        `*Monthly Net Income:* ${formData.monthlyIncome ? '₹' + Number(formData.monthlyIncome).toLocaleString('en-IN') : 'N/A'}`,
+        `*Salary Mode:* ${formData.incomeMode}`,
+        `*Salary Bank:* ${formData.primaryBank || 'N/A'}`,
+        `*Owns Car:* ${formData.ownsCar}`,
+        `*Estimated CIBIL:* ${formData.cibilScore}`,
+        `*Required Loan Amount:* ₹${Number(loanAmount).toLocaleString('en-IN')}`,
+        `*Loan Tenure:* ${tenureMonths} Months (${(tenureMonths / 12).toFixed(1)} Years)`,
+        `----------------------------------------`,
+        `_Sent via shrikhafinserv.com_`
+      ];
+
+      const messageText = messageLines.join('\n');
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+
+      if (typeof window !== 'undefined') {
+        window.open(whatsappUrl, '_blank');
+      }
 
       setSubmittedData({
         occupationType: formData.occupationType,
@@ -206,7 +233,8 @@ export default function PersonalLoanForm({
         mobileNumber: formData.mobileNumber,
         dob: formData.dob,
         gender: formData.gender,
-        loanTenure: tenureMonths
+        loanTenure: tenureMonths,
+        whatsappUrl
       });
     } catch (err) {
       console.error('Submission error:', err);
@@ -223,9 +251,9 @@ export default function PersonalLoanForm({
           <div className="success-icon-wrapper">
             <CheckCircle2 size={44} className="success-icon" />
           </div>
-          <h3 className="success-title">Your Loan Application Has Been Validated!</h3>
+          <h3 className="success-title">Personal Loan Application Submitted Successfully!</h3>
           <p className="success-subtitle">
-            Thank you, <strong>{submittedData.fullName}</strong>. All required fields from your loan application have passed validation checks.
+            Thank you, <strong>{submittedData.fullName}</strong>. Your loan application details have been shared directly with our advisory desk on WhatsApp.
           </p>
 
           <div className="success-summary-grid">
@@ -295,16 +323,32 @@ export default function PersonalLoanForm({
             </div>
           </div>
 
-          <div className="demo-notice-box">
-            <Info size={18} className="notice-icon" />
+          <div className="whatsapp-notice-box">
+            <MessageCircle size={24} className="notice-icon whatsapp-icon" />
             <div className="notice-content">
-              <strong>Local Demonstration Notice</strong>
+              <strong>Application Shared via WhatsApp (+91 8550094257)</strong>
               <p>
-                Your application details have been validated locally in your browser. As per current project mode, no data was transmitted to external servers, banks, or CRM systems.
+                Your personal loan application details have been forwarded to our official WhatsApp number. If WhatsApp did not open automatically, click below to chat with our team:
               </p>
-              <p>
-                To speak directly with a certified loan advisor at Shrikha Finserv in Mysore, call <a href="tel:8792953082" className="phone-inline-link">8792953082</a>.
-              </p>
+              <div className="whatsapp-notice-actions">
+                <a
+                  href={submittedData.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-whatsapp btn-sm"
+                >
+                  <MessageCircle size={16} />
+                  <span>Open in WhatsApp (+91 8550094257)</span>
+                </a>
+                <a href="tel:8550094257" className="btn btn-primary btn-sm">
+                  <Phone size={14} />
+                  <span>Call 8550094257</span>
+                </a>
+                <a href="tel:8792953082" className="btn btn-secondary btn-sm">
+                  <Phone size={14} />
+                  <span>Call 8792953082</span>
+                </a>
+              </div>
             </div>
           </div>
 

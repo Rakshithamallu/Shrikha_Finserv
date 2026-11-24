@@ -17,7 +17,8 @@ import {
   Home,
   Building,
   Sparkles,
-  Info
+  Info,
+  MessageCircle
 } from 'lucide-react';
 import { formatINR } from '../../utils/homeLoanCalculator';
 
@@ -283,7 +284,35 @@ export default function HomeLoanEnquiryForm({ initialValues, updatedFromCalculat
        */
 
       // Simulated network validation latency
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise(resolve => setTimeout(resolve, 600));
+
+      // Format details for WhatsApp
+      const messageLines = [
+        `*New Home Loan Enquiry - Shrikha Finserv*`,
+        `----------------------------------------`,
+        `*Applicant Name:* ${formData.fullName}`,
+        `*Mobile Number:* ${formData.mobileNumber}`,
+        `*Email:* ${formData.email || 'Not provided'}`,
+        `*Employment Type:* ${formData.employmentType}`,
+        `*Monthly Income:* ${formData.monthlyIncome ? '₹' + Number(formData.monthlyIncome).toLocaleString('en-IN') : 'N/A'}`,
+        `*Property Value:* ${formData.propertyValue ? '₹' + Number(formData.propertyValue).toLocaleString('en-IN') : 'N/A'}`,
+        `*Loan Amount Required:* ${formData.loanAmount ? '₹' + Number(formData.loanAmount).toLocaleString('en-IN') : 'N/A'}`,
+        `*Preferred Tenure:* ${formData.loanTenure} Years`,
+        `*Property Purpose:* ${formData.propertyPurpose}`,
+        `*City:* ${formData.city}`,
+        `*Preferred Contact:* ${formData.preferredContact}`,
+        `*Message / Notes:*`,
+        `${formData.message || 'None'}`.trim(),
+        `----------------------------------------`,
+        `_Sent via shrikhafinserv.com_`
+      ];
+
+      const messageText = messageLines.join('\n');
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+
+      if (typeof window !== 'undefined') {
+        window.open(whatsappUrl, '_blank');
+      }
 
       setSubmittedData({
         fullName: formData.fullName,
@@ -297,7 +326,8 @@ export default function HomeLoanEnquiryForm({ initialValues, updatedFromCalculat
         propertyPurpose: formData.propertyPurpose,
         city: formData.city,
         preferredContact: formData.preferredContact,
-        message: formData.message
+        message: formData.message,
+        whatsappUrl
       });
     } catch (err) {
       console.error('Submission error:', err);
@@ -342,9 +372,9 @@ export default function HomeLoanEnquiryForm({ initialValues, updatedFromCalculat
             <div className="success-icon-wrapper">
               <CheckCircle2 size={48} className="success-icon" />
             </div>
-            <h3 className="success-title">Home Loan Enquiry Validated Successfully!</h3>
+            <h3 className="success-title">Home Loan Enquiry Submitted Successfully!</h3>
             <p className="success-subtitle">
-              Thank you, <strong>{submittedData.fullName}</strong>. Your home financing enquiry has passed all client-side validation rules.
+              Thank you, <strong>{submittedData.fullName}</strong>. Your home financing enquiry details have been shared directly with our advisory desk on WhatsApp.
             </p>
 
             <div className="success-summary-grid">
@@ -390,17 +420,33 @@ export default function HomeLoanEnquiryForm({ initialValues, updatedFromCalculat
               </div>
             </div>
 
-            {/* Clear Demonstration Mode Notice */}
-            <div className="demo-notice-box">
-              <Info size={20} className="notice-icon" />
+            {/* WhatsApp Forwarding & Direct Contact Box */}
+            <div className="whatsapp-notice-box">
+              <MessageCircle size={24} className="notice-icon whatsapp-icon" />
               <div className="notice-content">
-                <strong>Demonstration Mode Notice</strong>
+                <strong>Enquiry Shared via WhatsApp (+91 8550094257)</strong>
                 <p>
-                  This form submission has been verified and validated locally. As part of this demonstration environment, your personal details have <strong>not been transmitted to a live CRM or external lender database</strong>, and no representative notification has been initiated.
+                  Your home loan enquiry details have been forwarded to our official WhatsApp number. If WhatsApp did not open automatically, click below to chat with our team:
                 </p>
-                <p>
-                  To speak directly with a Shrikha Finserv advisor regarding housing finance options in Mysore or Karnataka, please call <a href="tel:8792953082" className="phone-inline-link">8792953082</a> or email <a href="mailto:shrikhafinserv@gmail.com" className="phone-inline-link">shrikhafinserv@gmail.com</a>.
-                </p>
+                <div className="whatsapp-notice-actions">
+                  <a
+                    href={submittedData.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-whatsapp btn-sm"
+                  >
+                    <MessageCircle size={16} />
+                    <span>Open in WhatsApp (+91 8550094257)</span>
+                  </a>
+                  <a href="tel:8550094257" className="btn btn-primary btn-sm">
+                    <Phone size={14} />
+                    <span>Call 8550094257</span>
+                  </a>
+                  <a href="tel:8792953082" className="btn btn-secondary btn-sm">
+                    <Phone size={14} />
+                    <span>Call 8792953082</span>
+                  </a>
+                </div>
               </div>
             </div>
 

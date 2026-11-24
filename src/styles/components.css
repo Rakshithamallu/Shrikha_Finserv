@@ -2662,10 +2662,38 @@
   margin-bottom: 1.5rem;
 }
 
+.alert-success,
 .alert-demo {
   background-color: #F0FDF4;
   border: 1.5px solid #86EFAC;
   color: #14532D;
+}
+
+.btn-whatsapp {
+  background-color: #25D366 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #20BD5A !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
+.whatsapp-preview-note {
+  background-color: #F0FDF4 !important;
+  border: 1px solid #BBF7D0 !important;
+  color: #166534 !important;
+}
+
+.whatsapp-preview-note svg {
+  color: #25D366 !important;
 }
 
 .alert-header {

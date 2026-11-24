@@ -18,7 +18,8 @@ import {
   Factory,
   Sparkles,
   Info,
-  Calendar
+  Calendar,
+  MessageCircle
 } from 'lucide-react';
 import {
   BUSINESS_TYPES,
@@ -267,11 +268,37 @@ export default function BusinessLoanEnquiryForm({ initialValues, updatedFromCalc
     setIsSubmitting(true);
 
     try {
-      /**
-       * Future API Integration Endpoint:
-       * POST /api/enquiries with JSON body
-       */
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise(resolve => setTimeout(resolve, 600));
+
+      // Format details for WhatsApp
+      const messageLines = [
+        `*New Business Loan Enquiry - Shrikha Finserv*`,
+        `----------------------------------------`,
+        `*Contact Person:* ${formData.fullName}`,
+        `*Mobile Number:* ${formData.mobileNumber}`,
+        `*Email:* ${formData.email || 'Not provided'}`,
+        `*Business Name:* ${formData.businessName}`,
+        `*Business Type:* ${formData.businessType}`,
+        `*Industry:* ${formData.industry}`,
+        `*Business Vintage:* ${formData.businessVintage}`,
+        `*Monthly Turnover:* ${formData.monthlyTurnover ? '₹' + Number(formData.monthlyTurnover).toLocaleString('en-IN') : 'N/A'}`,
+        `*Loan Amount Required:* ${formData.loanAmount ? '₹' + Number(formData.loanAmount).toLocaleString('en-IN') : 'N/A'}`,
+        `*Financing Purpose:* ${formData.loanPurpose}`,
+        `*Requested Tenure:* ${formData.loanTenure} Years`,
+        `*Operating City:* ${formData.city}`,
+        `*Preferred Contact:* ${formData.preferredContact}`,
+        `*Requirements / Notes:*`,
+        `${formData.message || 'None'}`.trim(),
+        `----------------------------------------`,
+        `_Sent via shrikhafinserv.com_`
+      ];
+
+      const messageText = messageLines.join('\n');
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+
+      if (typeof window !== 'undefined') {
+        window.open(whatsappUrl, '_blank');
+      }
 
       setSubmittedData({
         fullName: formData.fullName,
@@ -287,7 +314,8 @@ export default function BusinessLoanEnquiryForm({ initialValues, updatedFromCalc
         loanTenure: formData.loanTenure,
         city: formData.city,
         preferredContact: formData.preferredContact,
-        message: formData.message
+        message: formData.message,
+        whatsappUrl
       });
     } catch (err) {
       console.error('Submission error:', err);
@@ -332,9 +360,9 @@ export default function BusinessLoanEnquiryForm({ initialValues, updatedFromCalc
             <div className="success-icon-wrapper">
               <CheckCircle2 size={48} className="success-icon" />
             </div>
-            <h3 className="success-title">Business Loan Enquiry Validated Successfully!</h3>
+            <h3 className="success-title">Business Loan Enquiry Submitted Successfully!</h3>
             <p className="success-subtitle">
-              Thank you, <strong>{submittedData.fullName}</strong>. Your business financing details for <strong>{submittedData.businessName}</strong> have passed all frontend checks.
+              Thank you, <strong>{submittedData.fullName}</strong>. Your commercial financing details for <strong>{submittedData.businessName}</strong> have been shared directly with our advisory desk on WhatsApp.
             </p>
 
             <div className="success-summary-grid">
@@ -388,17 +416,33 @@ export default function BusinessLoanEnquiryForm({ initialValues, updatedFromCalc
               </div>
             </div>
 
-            {/* Clear Demonstration Mode Notice */}
-            <div className="demo-notice-box">
-              <Info size={20} className="notice-icon" />
+            {/* WhatsApp Forwarding & Direct Contact Box */}
+            <div className="whatsapp-notice-box">
+              <MessageCircle size={24} className="notice-icon whatsapp-icon" />
               <div className="notice-content">
-                <strong>Demonstration Mode Notice</strong>
+                <strong>Enquiry Shared via WhatsApp (+91 8550094257)</strong>
                 <p>
-                  This form submission has been validated in the browser for demonstration and architectural testing. In accordance with project instructions, your enquiry details have <strong>not been transmitted to a lender or CRM</strong>, and no representative notification has been initiated.
+                  Your commercial financing enquiry details have been forwarded to our official WhatsApp number. If WhatsApp did not open automatically, click below to chat with our team:
                 </p>
-                <p>
-                  To speak directly with a Shrikha Finserv advisor regarding commercial finance in Mysore or Karnataka, please call <a href="tel:8792953082" className="phone-inline-link">8792953082</a> or email <a href="mailto:shrikhafinserv@gmail.com" className="phone-inline-link">shrikhafinserv@gmail.com</a>.
-                </p>
+                <div className="whatsapp-notice-actions">
+                  <a
+                    href={submittedData.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-whatsapp btn-sm"
+                  >
+                    <MessageCircle size={16} />
+                    <span>Open in WhatsApp (+91 8550094257)</span>
+                  </a>
+                  <a href="tel:8550094257" className="btn btn-primary btn-sm">
+                    <Phone size={14} />
+                    <span>Call 8550094257</span>
+                  </a>
+                  <a href="tel:8792953082" className="btn btn-secondary btn-sm">
+                    <Phone size={14} />
+                    <span>Call 8792953082</span>
+                  </a>
+                </div>
               </div>
             </div>
 

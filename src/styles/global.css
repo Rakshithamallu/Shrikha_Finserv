@@ -512,6 +512,23 @@ ul, ol {
   border-left-color: var(--color-warning);
 }
 
+.btn-whatsapp {
+  background-color: #25D366 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #20BD5A !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
 /* WhatsApp Floating Button */
 .whatsapp-float {
   position: fixed;

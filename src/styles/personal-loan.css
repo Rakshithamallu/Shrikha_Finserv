@@ -1168,6 +1168,35 @@
   color: var(--color-primary);
 }
 
+.whatsapp-notice-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  background: #F0FDF4;
+  border: 1.5px solid #86EFAC;
+  border-radius: var(--radius-md);
+  padding: 1.35rem 1.5rem;
+  max-width: 650px;
+  margin: 0 auto 2rem auto;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #14532D;
+}
+
+.whatsapp-notice-box .whatsapp-icon {
+  color: #25D366;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.whatsapp-notice-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
 .demo-notice-box {
   display: flex;
   align-items: flex-start;

@@ -15,7 +15,8 @@ import {
   MapPin,
   MessageSquare,
   Sparkles,
-  Info
+  Info,
+  MessageCircle
 } from 'lucide-react';
 import { formatINR } from '../../utils/emiCalculator';
 
@@ -258,10 +259,35 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
        * =========================================================================
        */
 
-      // Simulated network processing latency (800ms) for realistic UX
-      await new Promise(resolve => setTimeout(resolve, 800));
+      // Simulated network processing latency (600ms) for realistic UX
+      await new Promise(resolve => setTimeout(resolve, 600));
 
-      // Successfully validated demo submission
+      // Format details for WhatsApp
+      const messageLines = [
+        `*New Personal Loan Enquiry - Shrikha Finserv*`,
+        `----------------------------------------`,
+        `*Applicant Name:* ${formData.fullName}`,
+        `*Mobile Number:* ${formData.mobileNumber}`,
+        `*Email:* ${formData.email || 'Not provided'}`,
+        `*Employment Type:* ${formData.employmentType}`,
+        `*Monthly Income:* ${formData.monthlyIncome ? '₹' + Number(formData.monthlyIncome).toLocaleString('en-IN') : 'N/A'}`,
+        `*Required Loan Amount:* ${formData.loanAmount ? '₹' + Number(formData.loanAmount).toLocaleString('en-IN') : 'N/A'}`,
+        `*Preferred Tenure:* ${formData.loanTenure} Years`,
+        `*City:* ${formData.city}`,
+        `*Preferred Contact:* ${formData.preferredContact}`,
+        `*Message / Notes:*`,
+        `${formData.message || 'None'}`.trim(),
+        `----------------------------------------`,
+        `_Sent via shrikhafinserv.com_`
+      ];
+
+      const messageText = messageLines.join('\n');
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+
+      if (typeof window !== 'undefined') {
+        window.open(whatsappUrl, '_blank');
+      }
+
       setSubmittedData({
         fullName: formData.fullName,
         mobileNumber: formData.mobileNumber,
@@ -273,6 +299,7 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
         city: formData.city,
         preferredContact: formData.preferredContact,
         message: formData.message,
+        whatsappUrl,
         validatedAt: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
       });
     } catch (err) {
@@ -319,9 +346,9 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
             <div className="success-icon-wrapper">
               <CheckCircle2 size={48} className="success-icon" />
             </div>
-            <h3 className="success-title">Enquiry Form Validated Successfully!</h3>
+            <h3 className="success-title">Personal Loan Enquiry Submitted Successfully!</h3>
             <p className="success-subtitle">
-              Thank you, <strong>{submittedData.fullName}</strong>. Your preliminary details for a personal loan have passed all frontend validation checks.
+              Thank you, <strong>{submittedData.fullName}</strong>. Your enquiry details have been shared directly with our advisory desk on WhatsApp.
             </p>
 
             {/* Validation Details Summary */}
@@ -360,17 +387,33 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
               </div>
             </div>
 
-            {/* Strict Factual Disclaimer regarding Demo Mode */}
-            <div className="demo-notice-box">
-              <Info size={20} className="notice-icon" />
+            {/* WhatsApp Forwarding & Immediate Contact Box */}
+            <div className="whatsapp-notice-box">
+              <MessageCircle size={24} className="notice-icon whatsapp-icon" />
               <div className="notice-content">
-                <strong>Demonstration Mode Notice</strong>
+                <strong>Enquiry Shared via WhatsApp (+91 8550094257)</strong>
                 <p>
-                  This enquiry was successfully validated in the browser interface. In accordance with current demonstration constraints, this form has <strong>not been transmitted to a live CRM or external lender database</strong>, and no actual representative notification or credit bureau inquiry has been performed.
+                  Your personal loan application details have been forwarded to our official WhatsApp number. If WhatsApp did not open automatically, click below to chat with our team:
                 </p>
-                <p>
-                  To connect directly with the Shrikha Finserv office in Mysore, please reach out via phone at <a href="tel:8792953082" className="phone-inline-link">8792953082</a> or email <a href="mailto:shrikhafinserv@gmail.com" className="phone-inline-link">shrikhafinserv@gmail.com</a>.
-                </p>
+                <div className="whatsapp-notice-actions">
+                  <a
+                    href={submittedData.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-whatsapp btn-sm"
+                  >
+                    <MessageCircle size={16} />
+                    <span>Open in WhatsApp (+91 8550094257)</span>
+                  </a>
+                  <a href="tel:8550094257" className="btn btn-primary btn-sm">
+                    <Phone size={14} />
+                    <span>Call 8550094257</span>
+                  </a>
+                  <a href="tel:8792953082" className="btn btn-secondary btn-sm">
+                    <Phone size={14} />
+                    <span>Call 8792953082</span>
+                  </a>
+                </div>
               </div>
             </div>
 
