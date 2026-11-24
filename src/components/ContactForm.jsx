@@ -270,14 +270,14 @@ export default function ContactForm({ preselectedService }) {
     ];
 
     const messageText = messageLines.join('\n');
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=918792953082&text=${encodeURIComponent(messageText)}`;
 
     try {
       // Background API logging
       await fetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...submissionData, whatsappTarget: '918550094257' })
+        body: JSON.stringify({ ...submissionData, whatsappTarget: '918792953082' })
       }).catch(() => {});
     } catch (e) {
       // offline-safe
@@ -449,10 +449,10 @@ export default function ContactForm({ preselectedService }) {
                     <strong>Enquiry Submitted Successfully!</strong>
                   </div>
                   <p className="alert-text">
-                    Thank you, <strong>{formData.fullName}</strong>. Your enquiry for <strong>{formData.interestedService}</strong> has been received and your details are being shared with our team on WhatsApp (<strong>+91 8550094257</strong>).
+                    Thank you, <strong>{formData.fullName}</strong>. Your enquiry for <strong>{formData.interestedService}</strong> has been received and your details are ready to be sent to our WhatsApp desk (<strong>+91 8792953082</strong>).
                   </p>
                   <p className="alert-action-prompt">
-                    If WhatsApp did not open automatically, click below to send your details directly or contact our desk:
+                    Click below to send your details directly on WhatsApp or call our desk:
                   </p>
                   <div className="alert-cta-buttons">
                     <a
@@ -462,13 +462,9 @@ export default function ContactForm({ preselectedService }) {
                       className="btn btn-whatsapp btn-sm"
                     >
                       <MessageCircle size={16} />
-                      <span>Chat on WhatsApp (+91 8550094257)</span>
+                      <span>Send to WhatsApp (+91 8792953082)</span>
                     </a>
-                    <a href="tel:8550094257" className="btn btn-primary btn-sm">
-                      <Phone size={14} />
-                      <span>Call 8550094257</span>
-                    </a>
-                    <a href="tel:8792953082" className="btn btn-secondary btn-sm">
+                    <a href="tel:8792953082" className="btn btn-primary btn-sm">
                       <Phone size={14} />
                       <span>Call 8792953082</span>
                     </a>
@@ -776,7 +772,7 @@ export default function ContactForm({ preselectedService }) {
               {/* WhatsApp Action Box */}
               <div className="whatsapp-modal-cta-box">
                 <p className="whatsapp-cta-text">
-                  To view and send your complete enquiry directly on WhatsApp, click below:
+                  To send your completed enquiry directly to our official WhatsApp, click below:
                 </p>
                 <a
                   href={submissionResult.whatsappUrl}
@@ -785,7 +781,7 @@ export default function ContactForm({ preselectedService }) {
                   className="btn btn-whatsapp btn-lg btn-whatsapp-cta"
                 >
                   <MessageCircle size={20} />
-                  <span>Send Message on WhatsApp (+91 8550094257)</span>
+                  <span>Send Message on WhatsApp (+91 8792953082)</span>
                 </a>
               </div>
             </div>
@@ -798,9 +794,9 @@ export default function ContactForm({ preselectedService }) {
               >
                 Done / Close
               </button>
-              <a href="tel:8550094257" className="btn btn-primary btn-sm">
+              <a href="tel:8792953082" className="btn btn-primary btn-sm">
                 <Phone size={14} />
-                <span>Call 8550094257</span>
+                <span>Call 8792953082</span>
               </a>
             </div>
           </div>

@@ -148,12 +148,12 @@ export default function CarLoanPage({ onNavigateHome }) {
 
       {/* Floating Action Controls */}
       <a
-        href="https://wa.me/918550094257?text=Hello%20Shrikha%20Finserv,%20I%20would%20like%20to%20enquire%20about%20a%20Car%20Loan."
+        href="https://wa.me/918792953082?text=Hello%20Shrikha%20Finserv,%20I%20would%20like%20to%20enquire%20about%20a%20Car%20Loan."
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
         aria-label="Chat with Shrikha Finserv on WhatsApp"
-        title="Chat on WhatsApp (8550094257)"
+        title="Chat on WhatsApp (8792953082)"
       >
         <MessageCircle size={20} />
         <span>WhatsApp</span>

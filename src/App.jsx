@@ -347,12 +347,12 @@ export default function App() {
       {/* Floating Action Controls */}
       {/* 1. Official WhatsApp Click-to-Chat Button */}
       <a
-        href="https://wa.me/918550094257?text=Hello%20Shrikha%20Finserv,%20I%20would%20like%20to%20enquire%20about%20your%20financial%20services."
+        href="https://wa.me/918792953082?text=Hello%20Shrikha%20Finserv,%20I%20would%20like%20to%20enquire%20about%20your%20financial%20services."
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
         aria-label="Chat with Shrikha Finserv on WhatsApp"
-        title="Chat on WhatsApp (8550094257)"
+        title="Chat on WhatsApp (8792953082)"
       >
         <MessageCircle size={20} />
         <span>WhatsApp</span>

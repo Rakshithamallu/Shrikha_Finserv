@@ -282,7 +282,7 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
       ];
 
       const messageText = messageLines.join('\n');
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=918792953082&text=${encodeURIComponent(messageText)}`;
 
       setSubmittedData({
         fullName: formData.fullName,
@@ -387,9 +387,9 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
             <div className="whatsapp-notice-box">
               <MessageCircle size={24} className="notice-icon whatsapp-icon" />
               <div className="notice-content">
-                <strong>Enquiry Shared via WhatsApp (+91 8550094257)</strong>
+                <strong>Enquiry Shared via WhatsApp (+91 8792953082)</strong>
                 <p>
-                  Your personal loan application details have been forwarded to our official WhatsApp number. If WhatsApp did not open automatically, click below to chat with our team:
+                  Your personal loan application details have been prepared for our official WhatsApp helpline. Click below to send your details directly:
                 </p>
                 <div className="whatsapp-notice-actions">
                   <a
@@ -399,13 +399,9 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
                     className="btn btn-whatsapp btn-sm"
                   >
                     <MessageCircle size={16} />
-                    <span>Open in WhatsApp (+91 8550094257)</span>
+                    <span>Send Message on WhatsApp (+91 8792953082)</span>
                   </a>
-                  <a href="tel:8550094257" className="btn btn-primary btn-sm">
-                    <Phone size={14} />
-                    <span>Call 8550094257</span>
-                  </a>
-                  <a href="tel:8792953082" className="btn btn-secondary btn-sm">
+                  <a href="tel:8792953082" className="btn btn-primary btn-sm">
                     <Phone size={14} />
                     <span>Call 8792953082</span>
                   </a>
