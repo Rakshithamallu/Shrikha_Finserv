@@ -25,7 +25,7 @@ execSync(`${gitCmd} checkout -B gh-pages origin/gh-pages`, { cwd: rootDir, stdio
 console.log('3. Cleaning old gh-pages files');
 const items = fs.readdirSync(rootDir);
 for (const item of items) {
-  if (item === '.git') continue;
+  if (item === '.git' || item === 'node_modules') continue;
   fs.rmSync(path.join(rootDir, item), { recursive: true, force: true });
 }
 

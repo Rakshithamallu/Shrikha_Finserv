@@ -188,7 +188,7 @@ export default function ContactForm({ preselectedService }) {
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState(null);
-  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // When a service card is clicked, update form dropdown
   useEffect(() => {
@@ -248,7 +248,53 @@ export default function ContactForm({ preselectedService }) {
     return '';
   };
 
-  const handleOpenPreview = (e) => {
+  const executeSubmission = async (currentData) => {
+    setIsSubmitting(true);
+    setSubmissionResult(null);
+
+    const submissionData = currentData || formData;
+
+    // Format all client details for WhatsApp
+    const messageLines = [
+      `*New Service Enquiry - Shrikha Finserv*`,
+      `----------------------------------------`,
+      `*Full Name:* ${submissionData.fullName}`,
+      `*Mobile Number:* ${submissionData.phoneNumber}`,
+      `*Email:* ${submissionData.email || 'Not provided'}`,
+      `*Interested Service:* ${submissionData.interestedService}`,
+      `*Preferred Contact:* ${submissionData.preferredContactMethod}`,
+      `*Requirements / Message:*`,
+      `${submissionData.message || 'No additional notes provided.'}`.trim(),
+      `----------------------------------------`,
+      `_Sent via shrikhafinserv.com_`
+    ];
+
+    const messageText = messageLines.join('\n');
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
+
+    try {
+      // Background API logging
+      await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...submissionData, whatsappTarget: '918550094257' })
+      }).catch(() => {});
+    } catch (e) {
+      // offline-safe
+    }
+
+    // Set success state and show Success Popup Modal (do not forcibly redirect)
+    setSubmissionResult({
+      status: 'success',
+      whatsappUrl,
+      data: { ...submissionData },
+      message: 'Your enquiry has been received successfully.'
+    });
+    setShowSuccessModal(true);
+    setIsSubmitting(false);
+  };
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     setHasAttemptedSubmit(true);
 
@@ -267,7 +313,7 @@ export default function ContactForm({ preselectedService }) {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      setShowPreviewModal(true);
+      executeSubmission(formData);
     } else {
       // Focus and smoothly scroll to the first invalid field
       const firstErrorKey = ['fullName', 'phoneNumber', 'email', 'interestedService', 'message', 'consent'].find(
@@ -281,53 +327,6 @@ export default function ContactForm({ preselectedService }) {
         }
       }
     }
-  };
-
-  const executeSubmission = async () => {
-    setIsSubmitting(true);
-    setSubmissionResult(null);
-
-    // Format all client details for WhatsApp forwarding
-    const messageLines = [
-      `*New Service Enquiry - Shrikha Finserv*`,
-      `----------------------------------------`,
-      `*Full Name:* ${formData.fullName}`,
-      `*Mobile Number:* ${formData.phoneNumber}`,
-      `*Email:* ${formData.email || 'Not provided'}`,
-      `*Interested Service:* ${formData.interestedService}`,
-      `*Preferred Contact:* ${formData.preferredContactMethod}`,
-      `*Requirements / Message:*`,
-      `${formData.message || 'No additional notes provided.'}`.trim(),
-      `----------------------------------------`,
-      `_Sent via shrikhafinserv.com_`
-    ];
-
-    const messageText = messageLines.join('\n');
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
-
-    try {
-      // Optional background API call
-      await fetch('/api/enquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, whatsappTarget: '918550094257' })
-      }).catch(() => {});
-    } catch (e) {
-      // offline-safe
-    }
-
-    // Direct WhatsApp popup trigger
-    if (typeof window !== 'undefined') {
-      window.open(whatsappUrl, '_blank');
-    }
-
-    setSubmissionResult({
-      status: 'success',
-      whatsappUrl,
-      message: 'Your enquiry has been received and details forwarded to WhatsApp (+91 8550094257).'
-    });
-    setShowPreviewModal(false);
-    setIsSubmitting(false);
   };
 
   return (
@@ -477,7 +476,7 @@ export default function ContactForm({ preselectedService }) {
                 </div>
               )}
 
-              <form onSubmit={handleOpenPreview} noValidate>
+              <form onSubmit={handleFormSubmit} noValidate>
                 {/* Full Name */}
                 <div className="form-group">
                   <label htmlFor="fullName" className="form-label">
@@ -703,12 +702,12 @@ export default function ContactForm({ preselectedService }) {
                     {isSubmitting ? (
                       <>
                         <Loader2 size={18} className="spinner-icon" />
-                        <span>Validating Details...</span>
+                        <span>Submitting Enquiry...</span>
                       </>
                     ) : (
                       <>
-                        <Eye size={18} />
-                        <span>Review & Submit Enquiry</span>
+                        <Send size={18} />
+                        <span>Submit Enquiry</span>
                       </>
                     )}
                   </button>
@@ -719,17 +718,20 @@ export default function ContactForm({ preselectedService }) {
         </div>
       </div>
 
-      {/* Confirmation & Preview Modal (Ensures high trust & compliance) */}
-      {showPreviewModal && (
-        <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="preview-modal-title">
-          <div className="modal-dialog">
-            <div className="modal-header">
-              <h3 id="preview-modal-title">Review Your Enquiry</h3>
+      {/* Success Popup Modal (Shows on Submit without auto-redirecting) */}
+      {showSuccessModal && submissionResult && (
+        <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+          <div className="modal-dialog success-modal-dialog">
+            <div className="modal-header success-modal-header">
+              <div className="success-badge-header">
+                <CheckCircle2 size={26} className="success-check-icon" />
+                <h3 id="success-modal-title">Enquiry Submitted Successfully!</h3>
+              </div>
               <button
                 type="button"
                 className="modal-close-btn"
-                onClick={() => setShowPreviewModal(false)}
-                aria-label="Close Preview"
+                onClick={() => setShowSuccessModal(false)}
+                aria-label="Close"
               >
                 <X size={20} />
               </button>
@@ -737,45 +739,54 @@ export default function ContactForm({ preselectedService }) {
 
             <div className="modal-body">
               <p className="modal-lead">
-                Please verify your contact details before submitting to Shrikha Finserv:
+                Thank you, <strong>{submissionResult.data?.fullName}</strong>. Your enquiry for <strong>{submissionResult.data?.interestedService}</strong> has been received by Shrikha Finserv.
               </p>
 
               <div className="preview-details-table">
                 <div className="preview-row">
                   <span className="preview-label">Full Name:</span>
-                  <span className="preview-val"><strong>{formData.fullName}</strong></span>
+                  <span className="preview-val"><strong>{submissionResult.data?.fullName}</strong></span>
                 </div>
                 <div className="preview-row">
-                  <span className="preview-label">Phone:</span>
-                  <span className="preview-val">{formData.phoneNumber}</span>
+                  <span className="preview-label">Mobile Number:</span>
+                  <span className="preview-val">{submissionResult.data?.phoneNumber}</span>
                 </div>
-                {formData.email && (
+                {submissionResult.data?.email && (
                   <div className="preview-row">
                     <span className="preview-label">Email:</span>
-                    <span className="preview-val">{formData.email}</span>
+                    <span className="preview-val">{submissionResult.data?.email}</span>
                   </div>
                 )}
                 <div className="preview-row">
                   <span className="preview-label">Interested Service:</span>
-                  <span className="preview-val badge badge-gold">{formData.interestedService}</span>
+                  <span className="preview-val badge badge-gold">{submissionResult.data?.interestedService}</span>
                 </div>
                 <div className="preview-row">
                   <span className="preview-label">Preferred Contact:</span>
-                  <span className="preview-val">{formData.preferredContactMethod}</span>
+                  <span className="preview-val">{submissionResult.data?.preferredContactMethod}</span>
                 </div>
-                {formData.message && (
+                {submissionResult.data?.message && (
                   <div className="preview-row">
-                    <span className="preview-label">Message:</span>
-                    <span className="preview-val">{formData.message}</span>
+                    <span className="preview-label">Requirements / Message:</span>
+                    <span className="preview-val">{submissionResult.data?.message}</span>
                   </div>
                 )}
               </div>
 
-              <div className="preview-note whatsapp-preview-note">
-                <MessageCircle size={16} />
-                <span>
-                  <strong>Instant WhatsApp Forwarding:</strong> Upon confirmation, your enquiry details will be forwarded directly to Shrikha Finserv on WhatsApp (<strong>+91 8550094257</strong>).
-                </span>
+              {/* WhatsApp Action Box */}
+              <div className="whatsapp-modal-cta-box">
+                <p className="whatsapp-cta-text">
+                  To view and send your complete enquiry directly on WhatsApp, click below:
+                </p>
+                <a
+                  href={submissionResult.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-whatsapp btn-lg btn-whatsapp-cta"
+                >
+                  <MessageCircle size={20} />
+                  <span>Send Message on WhatsApp (+91 8550094257)</span>
+                </a>
               </div>
             </div>
 
@@ -783,28 +794,14 @@ export default function ContactForm({ preselectedService }) {
               <button
                 type="button"
                 className="btn btn-secondary btn-sm"
-                onClick={() => setShowPreviewModal(false)}
+                onClick={() => setShowSuccessModal(false)}
               >
-                Edit Details
+                Done / Close
               </button>
-              <button
-                type="button"
-                className="btn btn-gold btn-sm"
-                onClick={executeSubmission}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 size={16} className="spinner-icon" />
-                    <span>Submitting...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    <span>Confirm & Send via WhatsApp</span>
-                  </>
-                )}
-              </button>
+              <a href="tel:8550094257" className="btn btn-primary btn-sm">
+                <Phone size={14} />
+                <span>Call 8550094257</span>
+              </a>
             </div>
           </div>
         </div>

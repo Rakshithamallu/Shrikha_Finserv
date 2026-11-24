@@ -296,10 +296,6 @@ export default function BusinessLoanEnquiryForm({ initialValues, updatedFromCalc
       const messageText = messageLines.join('\n');
       const whatsappUrl = `https://api.whatsapp.com/send?phone=918550094257&text=${encodeURIComponent(messageText)}`;
 
-      if (typeof window !== 'undefined') {
-        window.open(whatsappUrl, '_blank');
-      }
-
       setSubmittedData({
         fullName: formData.fullName,
         mobileNumber: formData.mobileNumber,
