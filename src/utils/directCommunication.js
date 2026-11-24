@@ -61,8 +61,60 @@ export const getDirectEmailUrl = (subject, bodyText) => {
 };
 
 /**
+ * Triggers direct email dispatch in the user's default email client
+ */
+export const triggerDirectEmail = (subject, bodyText) => {
+  const emailUrl = getDirectEmailUrl(subject, bodyText);
+  if (typeof window !== 'undefined') {
+    window.location.href = emailUrl;
+  }
+  return emailUrl;
+};
+
+/**
  * Returns phone dialer link
  */
 export const getDirectPhoneUrl = () => {
   return `tel:${TARGET_PHONE_RAW}`;
+};
+
+/**
+ * Triggers direct phone call dialer
+ */
+export const triggerDirectPhone = () => {
+  const phoneUrl = getDirectPhoneUrl();
+  if (typeof window !== 'undefined') {
+    window.location.href = phoneUrl;
+  }
+  return phoneUrl;
+};
+
+/**
+ * Triggers the exact preferred channel chosen by the user:
+ * - If user selected 'WhatsApp' -> immediately opens WhatsApp
+ * - If user selected 'Email' -> immediately opens Mail client
+ * - If user selected 'Phone Call' -> immediately opens Phone dialer
+ */
+export const triggerSelectedContactChannel = (preferredMethod, messageText, subject) => {
+  const norm = (preferredMethod || '').toLowerCase();
+  const emailUrl = getDirectEmailUrl(subject, messageText);
+  const phoneUrl = getDirectPhoneUrl();
+  const whatsappUrl = getDirectWhatsAppUrl(messageText);
+
+  if (typeof window !== 'undefined') {
+    try {
+      if (norm.includes('whatsapp')) {
+        triggerDirectWhatsApp(messageText);
+      } else if (norm.includes('mail') || norm.includes('email')) {
+        window.location.href = emailUrl;
+      } else {
+        // Default: Phone Call
+        window.location.href = phoneUrl;
+      }
+    } catch (e) {
+      console.error('Direct channel trigger error:', e);
+    }
+  }
+
+  return { whatsappUrl, emailUrl, phoneUrl };
 };

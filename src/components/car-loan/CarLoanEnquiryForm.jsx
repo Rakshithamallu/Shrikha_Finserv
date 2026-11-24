@@ -25,6 +25,7 @@ import {
   triggerDirectWhatsApp,
   getDirectEmailUrl,
   getDirectPhoneUrl,
+  triggerSelectedContactChannel,
   TARGET_PHONE_DISPLAY,
   TARGET_EMAIL
 } from '../../utils/directCommunication';
@@ -362,9 +363,12 @@ export default function CarLoanEnquiryForm({ initialValues, updatedFromCalculato
       ];
 
       const messageText = messageLines.join('\n');
-      const whatsappUrl = triggerDirectWhatsApp(messageText);
-      const emailUrl = getDirectEmailUrl(`Car Loan Enquiry - ${formData.fullName}`, messageText);
-      const phoneUrl = getDirectPhoneUrl();
+      const subject = `Car Loan Enquiry - ${formData.fullName}`;
+      const { whatsappUrl, emailUrl, phoneUrl } = triggerSelectedContactChannel(
+        formData.preferredContact,
+        messageText,
+        subject
+      );
 
       setSubmittedData({
         fullName: formData.fullName,

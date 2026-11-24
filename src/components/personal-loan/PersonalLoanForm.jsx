@@ -37,6 +37,7 @@ import {
   triggerDirectWhatsApp,
   getDirectEmailUrl,
   getDirectPhoneUrl,
+  triggerSelectedContactChannel,
   TARGET_PHONE_DISPLAY,
   TARGET_EMAIL
 } from '../../utils/directCommunication';
@@ -218,9 +219,12 @@ export default function PersonalLoanForm({
       ];
 
       const messageText = messageLines.join('\n');
-      const whatsappUrl = triggerDirectWhatsApp(messageText);
-      const emailUrl = getDirectEmailUrl(`Personal Loan Application - ${formData.fullName}`, messageText);
-      const phoneUrl = getDirectPhoneUrl();
+      const subject = `Personal Loan Application - ${formData.fullName}`;
+      const { whatsappUrl, emailUrl, phoneUrl } = triggerSelectedContactChannel(
+        'WhatsApp',
+        messageText,
+        subject
+      );
 
       setSubmittedData({
         occupationType: formData.occupationType,

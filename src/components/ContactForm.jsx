@@ -21,6 +21,7 @@ import {
   getDirectWhatsAppUrl,
   getDirectEmailUrl,
   getDirectPhoneUrl,
+  triggerSelectedContactChannel,
   TARGET_PHONE_DISPLAY,
   TARGET_EMAIL
 } from '../utils/directCommunication';
@@ -278,15 +279,17 @@ export default function ContactForm({ preselectedService }) {
     ];
 
     const messageText = messageLines.join('\n');
-
-    // On phone: directly opens native WhatsApp app (bypassing web landing page)
-    // On desktop: opens WhatsApp directly
-    const whatsappUrl = triggerDirectWhatsApp(messageText);
-
-    // Direct email and call targets
     const emailSubject = `New Service Enquiry - ${submissionData.fullName} (${submissionData.interestedService})`;
-    const emailUrl = getDirectEmailUrl(emailSubject, messageText);
-    const phoneUrl = getDirectPhoneUrl();
+
+    // Automatically trigger the exact preferred contact method chosen by the client:
+    // - If WhatsApp -> directly opens WhatsApp
+    // - If Email -> directly opens Email client
+    // - If Phone Call -> directly opens Phone Call dialer
+    const { whatsappUrl, emailUrl, phoneUrl } = triggerSelectedContactChannel(
+      submissionData.preferredContactMethod,
+      messageText,
+      emailSubject
+    );
 
     try {
       // Background API logging (fire-and-forget, do not await)
@@ -305,6 +308,7 @@ export default function ContactForm({ preselectedService }) {
       whatsappUrl,
       emailUrl,
       phoneUrl,
+      preferredContactMethod: submissionData.preferredContactMethod,
       data: { ...submissionData },
       message: 'Your enquiry has been received successfully.'
     });
@@ -475,16 +479,18 @@ export default function ContactForm({ preselectedService }) {
                   <div className="alert-cta-buttons">
                     <a
                       href={submissionResult.whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="btn btn-whatsapp btn-sm"
                     >
                       <MessageCircle size={16} />
-                      <span>Chat on WhatsApp (+91 8792953082)</span>
+                      <span>WhatsApp (+91 8792953082)</span>
                     </a>
-                    <a href="tel:8792953082" className="btn btn-primary btn-sm">
+                    <a href={submissionResult.phoneUrl || 'tel:8792953082'} className="btn btn-primary btn-sm">
                       <Phone size={14} />
                       <span>Call 8792953082</span>
+                    </a>
+                    <a href={submissionResult.emailUrl || 'mailto:shrikhafinserv@gmail.com'} className="btn btn-secondary btn-sm">
+                      <Mail size={14} />
+                      <span>Email Desk</span>
                     </a>
                   </div>
                 </div>
