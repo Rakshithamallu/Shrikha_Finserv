@@ -38,10 +38,13 @@ fs.writeFileSync(path.join(rootDir, 'CNAME'), 'shrikhafinserv.com\n', 'utf8');
 // Ensure .nojekyll exists
 fs.writeFileSync(path.join(rootDir, '.nojekyll'), '', 'utf8');
 
+// Ensure .gitignore exists on gh-pages to exclude node_modules
+fs.writeFileSync(path.join(rootDir, '.gitignore'), 'node_modules\ndist\n*.zip\n*.log\n', 'utf8');
+
 console.log('5. Staging and committing to gh-pages');
 execSync(`${gitCmd} add -A`, { cwd: rootDir, stdio: 'inherit' });
 try {
-  execSync(`${gitCmd} commit -m "Deploy production build with WhatsApp 8550094257 integration and no demo mode"`, { cwd: rootDir, stdio: 'inherit' });
+  execSync(`${gitCmd} commit -m "Deploy production build with WhatsApp 8792953082 and success popup modal"`, { cwd: rootDir, stdio: 'inherit' });
 } catch (e) {
   console.log('Nothing new to commit or already committed.');
 }
