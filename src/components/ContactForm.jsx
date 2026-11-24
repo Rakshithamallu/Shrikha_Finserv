@@ -272,9 +272,19 @@ export default function ContactForm({ preselectedService }) {
     const messageText = messageLines.join('\n');
     const whatsappUrl = `https://api.whatsapp.com/send?phone=918792953082&text=${encodeURIComponent(messageText)}`;
 
+    // Automatically open WhatsApp in a new tab without redirecting this page
+    // Triggered synchronously on user submit so popup blockers cannot block it
+    if (typeof window !== 'undefined') {
+      try {
+        window.open(whatsappUrl, '_blank');
+      } catch (e) {
+        console.error('WhatsApp auto-open error:', e);
+      }
+    }
+
     try {
-      // Background API logging
-      await fetch('/api/enquiries', {
+      // Background API logging (fire-and-forget, do not await)
+      fetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...submissionData, whatsappTarget: '918792953082' })
@@ -283,7 +293,7 @@ export default function ContactForm({ preselectedService }) {
       // offline-safe
     }
 
-    // Set success state and show Success Popup Modal (do not forcibly redirect)
+    // Set success state and show Success Popup Modal
     setSubmissionResult({
       status: 'success',
       whatsappUrl,
@@ -449,10 +459,10 @@ export default function ContactForm({ preselectedService }) {
                     <strong>Enquiry Submitted Successfully!</strong>
                   </div>
                   <p className="alert-text">
-                    Thank you, <strong>{formData.fullName}</strong>. Your enquiry for <strong>{formData.interestedService}</strong> has been received and your details are ready to be sent to our WhatsApp desk (<strong>+91 8792953082</strong>).
+                    Thank you, <strong>{formData.fullName}</strong>. Your enquiry for <strong>{formData.interestedService}</strong> has been received and forwarded to our WhatsApp desk (<strong>+91 8792953082</strong>).
                   </p>
                   <p className="alert-action-prompt">
-                    Click below to send your details directly on WhatsApp or call our desk:
+                    Our team will connect with you shortly. You can also chat directly on WhatsApp or call our desk:
                   </p>
                   <div className="alert-cta-buttons">
                     <a
@@ -462,7 +472,7 @@ export default function ContactForm({ preselectedService }) {
                       className="btn btn-whatsapp btn-sm"
                     >
                       <MessageCircle size={16} />
-                      <span>Send to WhatsApp (+91 8792953082)</span>
+                      <span>Chat on WhatsApp (+91 8792953082)</span>
                     </a>
                     <a href="tel:8792953082" className="btn btn-primary btn-sm">
                       <Phone size={14} />
@@ -726,7 +736,10 @@ export default function ContactForm({ preselectedService }) {
               <button
                 type="button"
                 className="modal-close-btn"
-                onClick={() => setShowSuccessModal(false)}
+                onClick={() => {
+                  setShowSuccessModal(false);
+                  setSubmissionResult(null);
+                }}
                 aria-label="Close"
               >
                 <X size={20} />
@@ -772,7 +785,7 @@ export default function ContactForm({ preselectedService }) {
               {/* WhatsApp Action Box */}
               <div className="whatsapp-modal-cta-box">
                 <p className="whatsapp-cta-text">
-                  To send your completed enquiry directly to our official WhatsApp, click below:
+                  Your enquiry has been forwarded directly to WhatsApp (+91 8792953082). If WhatsApp didn't open automatically, click below:
                 </p>
                 <a
                   href={submissionResult.whatsappUrl}
@@ -781,7 +794,7 @@ export default function ContactForm({ preselectedService }) {
                   className="btn btn-whatsapp btn-lg btn-whatsapp-cta"
                 >
                   <MessageCircle size={20} />
-                  <span>Send Message on WhatsApp (+91 8792953082)</span>
+                  <span>Open WhatsApp (+91 8792953082)</span>
                 </a>
               </div>
             </div>
@@ -789,12 +802,34 @@ export default function ContactForm({ preselectedService }) {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary btn-sm"
-                onClick={() => setShowSuccessModal(false)}
+                className="btn btn-primary btn-sm"
+                onClick={() => {
+                  setShowSuccessModal(false);
+                  setSubmissionResult(null);
+                  setFormData({
+                    fullName: '',
+                    phoneNumber: '',
+                    email: '',
+                    interestedService: 'Personal Loan',
+                    preferredContactMethod: 'Phone',
+                    message: '',
+                    consent: false
+                  });
+                  setTouched({
+                    fullName: false,
+                    phoneNumber: false,
+                    email: false,
+                    interestedService: false,
+                    preferredContactMethod: false,
+                    message: false,
+                    consent: false
+                  });
+                  setHasAttemptedSubmit(false);
+                }}
               >
-                Done / Close
+                Done
               </button>
-              <a href="tel:8792953082" className="btn btn-primary btn-sm">
+              <a href="tel:8792953082" className="btn btn-secondary btn-sm">
                 <Phone size={14} />
                 <span>Call 8792953082</span>
               </a>

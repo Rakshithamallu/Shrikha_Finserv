@@ -284,6 +284,15 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
       const messageText = messageLines.join('\n');
       const whatsappUrl = `https://api.whatsapp.com/send?phone=918792953082&text=${encodeURIComponent(messageText)}`;
 
+      // Automatically open WhatsApp in a new tab without redirecting the page
+      if (typeof window !== 'undefined') {
+        try {
+          window.open(whatsappUrl, '_blank');
+        } catch (e) {
+          console.error('WhatsApp auto-open error:', e);
+        }
+      }
+
       setSubmittedData({
         fullName: formData.fullName,
         mobileNumber: formData.mobileNumber,
@@ -387,9 +396,9 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
             <div className="whatsapp-notice-box">
               <MessageCircle size={24} className="notice-icon whatsapp-icon" />
               <div className="notice-content">
-                <strong>Enquiry Shared via WhatsApp (+91 8792953082)</strong>
+                <strong>Enquiry Sent to WhatsApp (+91 8792953082)</strong>
                 <p>
-                  Your personal loan application details have been prepared for our official WhatsApp helpline. Click below to send your details directly:
+                  Your personal loan application details have been forwarded to our WhatsApp team. If WhatsApp didn't open automatically on your device, click below:
                 </p>
                 <div className="whatsapp-notice-actions">
                   <a
@@ -399,7 +408,7 @@ export default function LoanEnquiryForm({ initialValues, updatedFromCalculatorTi
                     className="btn btn-whatsapp btn-sm"
                   >
                     <MessageCircle size={16} />
-                    <span>Send Message on WhatsApp (+91 8792953082)</span>
+                    <span>Open WhatsApp (+91 8792953082)</span>
                   </a>
                   <a href="tel:8792953082" className="btn btn-primary btn-sm">
                     <Phone size={14} />
