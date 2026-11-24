@@ -817,7 +817,9 @@ export default function ContactForm({ preselectedService }) {
                     <span>Call Desk (8792953082)</span>
                   </a>
                   <a
-                    href={submissionResult.emailUrl || 'mailto:shrikhafinserv@gmail.com'}
+                    href={submissionResult.emailUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn btn-secondary btn-md btn-modal-action"
                   >
                     <Mail size={16} />

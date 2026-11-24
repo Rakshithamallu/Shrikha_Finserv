@@ -451,7 +451,12 @@ export default function HomeLoanEnquiryForm({ initialValues, updatedFromCalculat
                     <Phone size={14} />
                     <span>Call 8792953082</span>
                   </a>
-                  <a href={submittedData.emailUrl || 'mailto:shrikhafinserv@gmail.com'} className="btn btn-secondary btn-sm">
+                  <a
+                    href={submittedData.emailUrl || 'mailto:shrikhafinserv@gmail.com'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary btn-sm"
+                  >
                     <Mail size={14} />
                     <span>Email Desk</span>
                   </a>

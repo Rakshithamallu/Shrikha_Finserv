@@ -1,6 +1,6 @@
 /**
  * Shrikha Finserv Direct Communication Utility
- * Enables seamless direct routing to native WhatsApp, Phone Calls, and Email.
+ * Enables seamless direct routing to native WhatsApp, Phone Calls, and Gmail/Email.
  */
 
 export const TARGET_PHONE_RAW = '8792953082';
@@ -52,23 +52,59 @@ export const triggerDirectWhatsApp = (messageText) => {
 };
 
 /**
- * Returns mailto URL for direct email dispatch to Shrikha Finserv
+ * Returns direct email URL:
+ * - On PC/Desktop: Direct Gmail Web compose URL in browser (never triggers Microsoft Outlook sign-in popup!)
+ * - On Mobile: Native mailto: link (opens phone's native Gmail or Mail app)
  */
 export const getDirectEmailUrl = (subject, bodyText) => {
+  const isMobile = isMobileDevice();
+  const encodedSubject = encodeURIComponent(subject || 'Enquiry - Shrikha Finserv');
+  const encodedBody = encodeURIComponent(bodyText || '');
+  if (isMobile) {
+    return `mailto:${TARGET_EMAIL}?subject=${encodedSubject}&body=${encodedBody}`;
+  }
+  // Desktop/PC: Direct Gmail compose in browser
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${TARGET_EMAIL}&su=${encodedSubject}&body=${encodedBody}`;
+};
+
+/**
+ * Returns direct Gmail Web compose URL
+ */
+export const getGmailWebUrl = (subject, bodyText) => {
+  const encodedSubject = encodeURIComponent(subject || 'Enquiry - Shrikha Finserv');
+  const encodedBody = encodeURIComponent(bodyText || '');
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${TARGET_EMAIL}&su=${encodedSubject}&body=${encodedBody}`;
+};
+
+/**
+ * Returns fallback native mailto URL
+ */
+export const getMailtoUrl = (subject, bodyText) => {
   const encodedSubject = encodeURIComponent(subject || 'Enquiry - Shrikha Finserv');
   const encodedBody = encodeURIComponent(bodyText || '');
   return `mailto:${TARGET_EMAIL}?subject=${encodedSubject}&body=${encodedBody}`;
 };
 
 /**
- * Triggers direct email dispatch in the user's default email client
+ * Triggers direct email dispatch:
+ * - On Desktop: opens normal Gmail in a new tab (prevents Outlook prompt)
+ * - On Mobile: opens native mail app directly
  */
 export const triggerDirectEmail = (subject, bodyText) => {
-  const emailUrl = getDirectEmailUrl(subject, bodyText);
+  const isMobile = isMobileDevice();
+  const url = getDirectEmailUrl(subject, bodyText);
   if (typeof window !== 'undefined') {
-    window.location.href = emailUrl;
+    try {
+      if (isMobile) {
+        window.location.href = url;
+      } else {
+        window.open(url, '_blank');
+      }
+    } catch (e) {
+      console.error('Direct email trigger error:', e);
+    }
   }
-  return emailUrl;
+  return url;
 };
 
 /**
@@ -92,7 +128,7 @@ export const triggerDirectPhone = () => {
 /**
  * Triggers the exact preferred channel chosen by the user:
  * - If user selected 'WhatsApp' -> immediately opens WhatsApp
- * - If user selected 'Email' -> immediately opens Mail client
+ * - If user selected 'Email' -> immediately opens normal Gmail / Email client
  * - If user selected 'Phone Call' -> immediately opens Phone dialer
  */
 export const triggerSelectedContactChannel = (preferredMethod, messageText, subject) => {
@@ -106,7 +142,7 @@ export const triggerSelectedContactChannel = (preferredMethod, messageText, subj
       if (norm.includes('whatsapp')) {
         triggerDirectWhatsApp(messageText);
       } else if (norm.includes('mail') || norm.includes('email')) {
-        window.location.href = emailUrl;
+        triggerDirectEmail(subject, messageText);
       } else {
         // Default: Phone Call
         window.location.href = phoneUrl;
