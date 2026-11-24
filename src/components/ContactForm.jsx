@@ -16,6 +16,14 @@ import {
   Check,
   MessageCircle
 } from 'lucide-react';
+import {
+  triggerDirectWhatsApp,
+  getDirectWhatsAppUrl,
+  getDirectEmailUrl,
+  getDirectPhoneUrl,
+  TARGET_PHONE_DISPLAY,
+  TARGET_EMAIL
+} from '../utils/directCommunication';
 
 export const SERVICE_OPTIONS = [
   'Personal Loan',
@@ -32,7 +40,7 @@ export const SERVICE_OPTIONS = [
   'Other Enquiry'
 ];
 
-export const VALID_CONTACT_METHODS = ['Phone', 'WhatsApp', 'Email', 'Office Visit'];
+export const VALID_CONTACT_METHODS = ['Phone', 'WhatsApp', 'Email'];
 
 /**
  * Standard field-by-field validation rules
@@ -270,17 +278,15 @@ export default function ContactForm({ preselectedService }) {
     ];
 
     const messageText = messageLines.join('\n');
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=918792953082&text=${encodeURIComponent(messageText)}`;
 
-    // Automatically open WhatsApp in a new tab without redirecting this page
-    // Triggered synchronously on user submit so popup blockers cannot block it
-    if (typeof window !== 'undefined') {
-      try {
-        window.open(whatsappUrl, '_blank');
-      } catch (e) {
-        console.error('WhatsApp auto-open error:', e);
-      }
-    }
+    // On phone: directly opens native WhatsApp app (bypassing web landing page)
+    // On desktop: opens WhatsApp directly
+    const whatsappUrl = triggerDirectWhatsApp(messageText);
+
+    // Direct email and call targets
+    const emailSubject = `New Service Enquiry - ${submissionData.fullName} (${submissionData.interestedService})`;
+    const emailUrl = getDirectEmailUrl(emailSubject, messageText);
+    const phoneUrl = getDirectPhoneUrl();
 
     try {
       // Background API logging (fire-and-forget, do not await)
@@ -297,6 +303,8 @@ export default function ContactForm({ preselectedService }) {
     setSubmissionResult({
       status: 'success',
       whatsappUrl,
+      emailUrl,
+      phoneUrl,
       data: { ...submissionData },
       message: 'Your enquiry has been received successfully.'
     });
@@ -629,7 +637,7 @@ export default function ContactForm({ preselectedService }) {
                     >
                       {VALID_CONTACT_METHODS.map((method) => (
                         <option key={method} value={method}>
-                          {method === 'Phone' ? 'Phone Call' : method === 'Office Visit' ? 'Visit Mysore Office' : method}
+                          {method === 'Phone' ? 'Phone Call' : method}
                         </option>
                       ))}
                     </select>
@@ -782,20 +790,34 @@ export default function ContactForm({ preselectedService }) {
                 )}
               </div>
 
-              {/* WhatsApp Action Box */}
-              <div className="whatsapp-modal-cta-box">
+              {/* Direct Instant Channels: WhatsApp, Call, Email */}
+              <div className="whatsapp-modal-cta-box direct-connect-modal-box">
                 <p className="whatsapp-cta-text">
-                  Your enquiry has been forwarded directly to WhatsApp (+91 8792953082). If WhatsApp didn't open automatically, click below:
+                  Direct channels for your enquiry (opened directly without extra pages):
                 </p>
-                <a
-                  href={submissionResult.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-whatsapp btn-lg btn-whatsapp-cta"
-                >
-                  <MessageCircle size={20} />
-                  <span>Open WhatsApp (+91 8792953082)</span>
-                </a>
+                <div className="modal-direct-actions-grid">
+                  <a
+                    href={submissionResult.whatsappUrl}
+                    className="btn btn-whatsapp btn-md btn-modal-action"
+                  >
+                    <MessageCircle size={18} />
+                    <span>WhatsApp Desk (+91 8792953082)</span>
+                  </a>
+                  <a
+                    href={submissionResult.phoneUrl || 'tel:8792953082'}
+                    className="btn btn-primary btn-md btn-modal-action"
+                  >
+                    <Phone size={16} />
+                    <span>Call Desk (8792953082)</span>
+                  </a>
+                  <a
+                    href={submissionResult.emailUrl || 'mailto:shrikhafinserv@gmail.com'}
+                    className="btn btn-secondary btn-md btn-modal-action"
+                  >
+                    <Mail size={16} />
+                    <span>Email Desk (shrikhafinserv@gmail.com)</span>
+                  </a>
+                </div>
               </div>
             </div>
 

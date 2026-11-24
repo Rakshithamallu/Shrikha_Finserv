@@ -21,6 +21,13 @@ import {
   MessageCircle
 } from 'lucide-react';
 import { formatINR } from '../../utils/carLoanCalculator';
+import {
+  triggerDirectWhatsApp,
+  getDirectEmailUrl,
+  getDirectPhoneUrl,
+  TARGET_PHONE_DISPLAY,
+  TARGET_EMAIL
+} from '../../utils/directCommunication';
 
 export const POPULAR_CAR_BRANDS = [
   'Maruti Suzuki',
@@ -355,16 +362,9 @@ export default function CarLoanEnquiryForm({ initialValues, updatedFromCalculato
       ];
 
       const messageText = messageLines.join('\n');
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=918792953082&text=${encodeURIComponent(messageText)}`;
-
-      // Automatically open WhatsApp in a new tab without redirecting the page
-      if (typeof window !== 'undefined') {
-        try {
-          window.open(whatsappUrl, '_blank');
-        } catch (e) {
-          console.error('WhatsApp auto-open error:', e);
-        }
-      }
+      const whatsappUrl = triggerDirectWhatsApp(messageText);
+      const emailUrl = getDirectEmailUrl(`Car Loan Enquiry - ${formData.fullName}`, messageText);
+      const phoneUrl = getDirectPhoneUrl();
 
       setSubmittedData({
         fullName: formData.fullName,
@@ -382,7 +382,9 @@ export default function CarLoanEnquiryForm({ initialValues, updatedFromCalculato
         city: formData.city,
         preferredContact: formData.preferredContact,
         message: formData.message,
-        whatsappUrl
+        whatsappUrl,
+        emailUrl,
+        phoneUrl
       });
     } catch (err) {
       console.error('Submission error:', err);
@@ -494,16 +496,18 @@ export default function CarLoanEnquiryForm({ initialValues, updatedFromCalculato
                 <div className="whatsapp-notice-actions">
                   <a
                     href={submittedData.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="btn btn-whatsapp btn-sm"
                   >
                     <MessageCircle size={16} />
-                    <span>Open WhatsApp (+91 8792953082)</span>
+                    <span>WhatsApp (+91 8792953082)</span>
                   </a>
-                  <a href="tel:8792953082" className="btn btn-primary btn-sm">
+                  <a href={submittedData.phoneUrl || 'tel:8792953082'} className="btn btn-primary btn-sm">
                     <Phone size={14} />
                     <span>Call 8792953082</span>
+                  </a>
+                  <a href={submittedData.emailUrl || 'mailto:shrikhafinserv@gmail.com'} className="btn btn-secondary btn-sm">
+                    <Mail size={14} />
+                    <span>Email Desk</span>
                   </a>
                 </div>
               </div>

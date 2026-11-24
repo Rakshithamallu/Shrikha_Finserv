@@ -53,7 +53,7 @@ function rateLimiter(req, res, next) {
   next();
 }
 
-const VALID_CONTACT_METHODS = ['Phone', 'WhatsApp', 'Email', 'Office Visit'];
+const VALID_CONTACT_METHODS = ['Phone', 'WhatsApp', 'Email'];
 
 // POST /api/enquiries
 router.post('/', rateLimiter, (req, res) => {
